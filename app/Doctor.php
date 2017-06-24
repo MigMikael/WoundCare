@@ -9,17 +9,15 @@ class Doctor extends Model
     public $timestamps = true;
     protected $table = 'doctors';
     protected $fillable = [
+        'user_id',
         'name',
-        'email',
         'status',
         'expert',
         'profile_image',
-        'password',
         'token',
     ];
 
     protected $hidden = [
-        'password',
         'token'
     ];
 

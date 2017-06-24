@@ -28,6 +28,6 @@ class Cases extends Model
 
     public function wounds()
     {
-        return $this->hasMany('App\Wound');
+        return $this->hasMany('App\Wound', 'case_id');
     }
 }

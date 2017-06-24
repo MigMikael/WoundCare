@@ -9,6 +9,8 @@ class Patient extends Model
     public $timestamps = true;
     protected $table = 'patients';
     protected $fillable = [
+        'user_id',
+        'email',
         'name',
         'gender',
         'birthday',
@@ -18,19 +20,15 @@ class Patient extends Model
         'allergic',
         'status',
         'profile_image',
-        'username',
-        'password',
         'token',
     ];
 
     protected $hidden = [
-        'username',
-        'password',
         'token'
     ];
 
     public function cases()
     {
-        $this->hasMany('App\Cases');
+        return $this->hasMany('App\Cases');
     }
 }

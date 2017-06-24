@@ -15,14 +15,17 @@ class CreateDoctorTable extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('email')->unique();
+            $table->integer('user_id')->unsigned();
             $table->string('name');
             $table->string('status');
             $table->string('expert');
             $table->integer('profile_image');
-            $table->string('password');
             $table->string('token');
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users');
         });
     }
 

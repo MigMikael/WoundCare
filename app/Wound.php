@@ -17,6 +17,6 @@ class Wound extends Model
 
     public function progress()
     {
-        $this->hasMany('App\Progress');
+        return $this->hasMany('App\Progress');
     }
 }

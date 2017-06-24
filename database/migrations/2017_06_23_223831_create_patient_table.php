@@ -15,6 +15,7 @@ class CreatePatientTable extends Migration
     {
         Schema::create('patients', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned();
             $table->string('name');
             $table->string('gender');
             $table->date('birthday');
@@ -24,10 +25,12 @@ class CreatePatientTable extends Migration
             $table->string('allergic')->nullable();
             $table->string('status');
             $table->integer('profile_image');
-            $table->string('username');
-            $table->string('password');
             $table->string('token');
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users');
         });
     }
 
