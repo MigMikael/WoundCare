@@ -28,12 +28,6 @@
                             <h1>{{ $c->next_appointment }}</h1>
                         </div>
                     </div>
-
-                    <div class="panel-footer">
-                        <a class="btn btn-primary btn-lg" href="{{ url('cases/'.$c->id) }}">
-                            Detail
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -61,7 +55,9 @@
                             </div>
                             <hr>
                             <p>บริเวณแผล : {{ $wound->site }}</p>
-                            <p>สถานะแผล : {{ $wound->status }}</p>
+                            <p>สถานะแผล :
+                                <span class="label label-warning">{{ $wound->status }}</span>
+                            </p>
                         </div>
                         <div class="panel-footer">
                             <a class="btn btn-primary" href="{{ url('wound/'.$wound->id) }}">Healing Progress</a>

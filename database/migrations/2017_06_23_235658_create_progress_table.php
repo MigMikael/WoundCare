@@ -18,8 +18,8 @@ class CreateProgressTable extends Migration
             $table->integer('wound_id')->unsigned();
             $table->integer('image');
             $table->float('area');
-            $table->text('comment');
-            $table->text('advice');
+            $table->text('comment')->nullable();
+            $table->text('advice')->nullable();
             $table->string('status');
             $table->timestamps();
 

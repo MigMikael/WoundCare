@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Progress;
 use App\Wound;
 use App\Traits\ImageTrait;
 use Illuminate\Http\Request;
@@ -15,6 +16,7 @@ class WoundController extends Controller
         $wound = Wound::findOrFail($id);
         return view('wound.show', ['wound' => $wound]);
     }
+
     public function create($id)
     {
         return view('wound.create', ['case_id' => $id]);
@@ -27,7 +29,7 @@ class WoundController extends Controller
         $wound = [
             'case_id' => $request->get('case_id'),
             'site' => $request->get('site'),
-            'status' => 'during treatment',
+            'status' => 'Healing',
             'original_image' => $image->id
         ];
         $wound = Wound::create($wound);
@@ -48,5 +50,13 @@ class WoundController extends Controller
     public function destroy($id)
     {
 
+    }
+
+    public function progress($id)
+    {
+        $progress = Progress::findOrFail($id);
+        return view('progress.show', [
+            'p' => $progress
+        ]);
     }
 }

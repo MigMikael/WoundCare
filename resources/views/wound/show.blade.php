@@ -21,29 +21,37 @@
                 <h3>Healing Progress</h3>
             </div>
             <div class="timeline">
-                @foreach($wound->progress as $p)
+                @foreach($wound->progress->reverse() as $p)
                     <div class="timeline-block @if($loop->index % 2 == 0) timeline-block-right @else timeline-block-left @endif">
                         <div class="marker"></div>
                         <div class="well timeline-content" style="padding: 20px 10px 20px 10px">
-                            <h3>{{ $p->created_at }}</h3>
+                            <h3 >
+                                {{ $p->created_at }}
+                                @if($p->status == 'Diagnosed')
+                                <span class="label label-success">
+                                    {{ $p->status }}
+                                </span>
+                                @else
+                                <span class="label label-danger">
+                                    {{ $p->status }}
+                                </span>
+                                @endif
+
+                            </h3>
                             <hr>
 
                             <div class="col-md-6">
                                 <img class="img-thumbnail img-responsive" src="{{ url('image/show/'.$p->image) }}">
                             </div>
                             <div class="col-md-6" style="text-align: left">
-                                <h4>Area : {{ $p->area }}</h4>
-                                <a class="btn btn-primary" href="">Detail</a>
+                                <h4>Area : <b>{{ $p->area }}</b></h4>
+                                <a class="btn btn-default" href="{{ url('wound/progress/'.$p->id) }}">
+                                    Detail
+                                </a>
                             </div>
                         </div>
                     </div>
                 @endforeach
-                    <div class="timeline-block timeline-block-right">
-                        <div class="marker"></div>
-                        <div class="timeline-content well">
-                            <h3>Start</h3>
-                        </div>
-                    </div>
             </div>
 
 

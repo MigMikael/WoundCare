@@ -20,9 +20,32 @@ class DoctorController extends Controller
 
         $doctor = Doctor::where('user_id', $user_id)->first();
 
+        $waiting_cases = [];
+        $diagnosed_cases = [];
+        foreach ($doctor->cases as $c){
+            $is_waiting = false;
+            foreach ($c->wounds as $wound){
+                foreach ($wound->progress as $p){
+                    if($p->status == 'Waiting'){
+                        $is_waiting = true;
+                    }
+                }
+            }
+
+            if($is_waiting){
+                array_push($waiting_cases, Cases::find($c->id));
+            }else{
+                array_push($diagnosed_cases, Cases::find($c->id));
+            }
+        }
+        $doctor['waiting_cases'] = $waiting_cases;
+        $doctor['diagnosed_cases'] = $diagnosed_cases;
+
         return view('doctor.dashboard', [
             'doctor' => $doctor
         ]);
+
+        //return $waiting_cases;
     }
 
     public function index()

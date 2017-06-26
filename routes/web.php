@@ -34,6 +34,8 @@ Route::group(['middleware' => 'auth'], function (){
 
     */
     Route::group(['middleware' => 'authAdmin'], function (){
+        Route::get('admin/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
+
 
         Route::get('doctor/create', 'DoctorController@create')->name('doctor.create');
 
@@ -86,6 +88,8 @@ Route::group(['middleware' => 'auth'], function (){
         Route::post('wound', 'WoundController@store')->name('wound.store');
 
         Route::get('wound/{id}', 'WoundController@show')->name('wound.show');
+
+        Route::get('wound/progress/{id}', 'WoundController@progress')->name('wound.progress');
 
     });
 
