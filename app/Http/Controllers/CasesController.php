@@ -29,12 +29,12 @@ class CasesController extends Controller
             'patient_id' => $request->get('patient_id'),
             'doctor_id' => $doctor->id,
             'disease' => $request->get('disease'),
-            'status' => 'during treatment',
+            'status' => 'Healing',
             'next_appointment' => $request->get('next_date').' '.$request->get('next_time')
         ];
         Cases::create($cases);
 
-        return redirect()->action('PatientController@index');
+        return redirect()->action('DoctorController@dashboard');
     }
 
     public function edit($id)

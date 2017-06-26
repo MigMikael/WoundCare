@@ -19,4 +19,9 @@ class Wound extends Model
     {
         return $this->hasMany('App\Progress');
     }
+
+    public function cases()
+    {
+        return $this->belongsTo('App\Cases', 'case_id');
+    }
 }

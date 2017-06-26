@@ -10,7 +10,7 @@
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('patient') }}"  enctype="multipart/form-data">
                             {{ csrf_field() }}
-                            @include('cases._form')
+                            @include('patient._form')
                         </form>
                     </div>
                 </div>

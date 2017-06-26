@@ -44,9 +44,11 @@ class PatientController extends Controller
 
         $image = $this->storeImage($patient['profile_image'], 'profile');
         $patient['profile_image'] = $image->id;
-        Patient::create($patient);
+        $patient = Patient::create($patient);
 
-        return redirect()->action('PatientController@index');
+        return redirect()->action('CasesController@create', [
+            'patient_id' => $patient->id
+        ]);
     }
 
     public function edit($id)

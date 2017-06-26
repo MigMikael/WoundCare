@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Doctor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // redirect to dashboard
+        $user = Auth::user();
+
+        if($user->name == 'admin'){
+            return redirect()->action('AdminController@dashboard');
+        }
+
+        $doctor = Doctor::where('user_id', $user->id)->first();
+        if (sizeof($doctor) == 1){
+            return redirect()->action('DoctorController@dashboard');
+        }
+        else{
+            return redirect()->action('PatientController@dashboard');
+        }
+
+        //return view('/home');
     }
 }

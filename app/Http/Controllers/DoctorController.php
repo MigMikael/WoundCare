@@ -2,15 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Cases;
 use App\User;
 use App\Doctor;
 use Illuminate\Http\Request;
 use App\Traits\ImageTrait;
 use App\Helper\TokenGenerator;
+use Illuminate\Support\Facades\Auth;
 
 class DoctorController extends Controller
 {
     use ImageTrait;
+
+    public function dashboard()
+    {
+        $user_id = Auth::user()->id;
+
+        $doctor = Doctor::where('user_id', $user_id)->first();
+
+        return view('doctor.dashboard', [
+            'doctor' => $doctor
+        ]);
+    }
 
     public function index()
     {
@@ -20,7 +33,10 @@ class DoctorController extends Controller
 
     public function show($id)
     {
+        $user = User::findOrFail($id);
+        $doctor = Doctor::where('user_id', $user->id)->first();
 
+        return view('doctor.show', ['doctor' => $doctor]);
     }
     public function create()
     {

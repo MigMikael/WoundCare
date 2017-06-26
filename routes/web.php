@@ -52,19 +52,25 @@ Route::group(['middleware' => 'auth'], function (){
     */
     Route::group(['middleware' => 'authDoctor'], function (){
 
+        // dashboard
+        Route::get('doctor/dashboard', 'DoctorController@dashboard')->name('doctor.dashboard');
+
+        // profile
         Route::get('doctor/{id}', 'DoctorController@show')->name('doctor.show');
 
+        // edit profile
         Route::get('doctor/{id}/edit', 'DoctorController@edit')->name('doctor.edit');
 
+        // update profile
         Route::patch('doctor', 'DoctorController@update')->name('doctor.update');
 
 
 
-        Route::get('patient/{id}', 'PatientController@show')->name('patient.show');
-
         Route::get('patient/create', 'PatientController@create')->name('patient.create');
 
         Route::post('patient', 'PatientController@store')->name('patient.store');
+
+        Route::get('patient/{id}', 'PatientController@show')->name('patient.show');
 
 
 
