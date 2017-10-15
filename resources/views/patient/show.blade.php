@@ -13,12 +13,17 @@
                     </div>
 
                     <div class="panel-body">
-                        <p><b>เพศ : </b>{{ $patient->gender }}</p>
-                        <p><b>เกิด : </b>{{ $patient->birthday }}</p>
-                        <p><b>ที่อยู่ : </b>{{ $patient->address }}</p>
-                        <p><b>โทรศัพท์ : </b>{{ $patient->phone_number }}</p>
-                        <p><b>โรคประจำตัว : </b>{{ $patient->congenital_disease }}</p>
-                        <p><b>ประวัติการแพ้ : </b>{{ $patient->allergic }}</p>
+                        <div class="col-md-8">
+                            <p><b>เพศ : </b>{{ $patient->gender }}</p>
+                            <p><b>เกิด : </b>{{ $patient->birthday }}</p>
+                            <p><b>ที่อยู่ : </b>{{ $patient->address }}</p>
+                            <p><b>โทรศัพท์ : </b>{{ $patient->phone_number }}</p>
+                            <p><b>โรคประจำตัว : </b>{{ $patient->congenital_disease }}</p>
+                            <p><b>ประวัติการแพ้ : </b>{{ $patient->allergic }}</p>
+                        </div>
+                        <div class="col-md-4">
+                            {!! QrCode::size(250)->generate($patient->token) !!}
+                        </div>
                     </div>
 
                     <div class="panel-footer">
