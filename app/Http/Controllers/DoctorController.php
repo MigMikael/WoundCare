@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Traits\ImageTrait;
 use App\Helper\TokenGenerator;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Comment\Doc;
 
 class DoctorController extends Controller
 {
@@ -91,16 +92,41 @@ class DoctorController extends Controller
 
     public function edit($id)
     {
-        
+        $doctor = Doctor::findOrFail($id);
+        $user = User::findOrFail($doctor->user_id);
+        $doctor['email'] = $user->email;
+
+        return view('doctor.edit', ['doctor' => $doctor]);
     }
 
     public function update(Request $request, $id)
     {
-        
+        $doctor = Doctor::findOrFail($id);
+        $user = User::findOrFail($doctor->user_id);
+
+        $user->email = $request->get('email');
+        $doctor->name = $request->get('name');
+        $doctor->expert = $request->get('expert');
+
+        if($request->hasFile('profile_image')){
+            $image = $this->storeImage($request->file('profile_image'), 'profile');
+            $doctor->profile_image = $image->id;
+        }
+        $user->save();
+        $doctor->save();
+
+        return redirect()->action('DoctorController@index');
     }
 
     public function destroy($id)
     {
+        $doctor = Doctor::findOrFail($id);
+        $user = User::findOrFail($doctor->user_id);
+
+        $doctor->delete();
+        $user->delete();
+
+        return redirect()->action('DoctorController@index');
 
     }
 }

@@ -6,9 +6,11 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "barryvdh/laravel-ide-helper": "^2.4",
         "intervention/image": "^2.3",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
+        "laravelcollective/html": "^5.5",
         "orangehill/iseed": "^2.4",
         "simplesoftwareio/simple-qrcode": "^1.5"
     },

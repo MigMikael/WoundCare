@@ -23,25 +23,23 @@ Route::group(['middleware' => 'auth'], function (){
 
     Route::get('image/show/{id}', 'ImageController@show');
 
-    Route::get('doctor', 'DoctorController@index')->name('doctor.index');
+    Route::get('doctor', 'DoctorController@index');
 
     Route::get('patient', 'PatientController@index')->name('patient.index');
 
-    /*
 
-    Admin Can >>>
-    [create doctor], [delete doctor], [view all doctor], [view all patient]
+    Route::group(['prefix' => 'admin', 'middleware' => 'authAdmin'], function (){
 
-    */
-    Route::group(['middleware' => 'authAdmin'], function (){
-        Route::get('admin/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
+        Route::get('dashboard', 'AdminController@dashboard')->name('admin.dashboard');
 
 
-        Route::get('doctor/create', 'DoctorController@create')->name('doctor.create');
-
+        Route::get('doctor', 'DoctorController@index')->name('doctor.index');
         Route::post('doctor', 'DoctorController@store')->name('doctor.store');
-
-        Route::delete('doctor', 'DoctorController@destroy')->name('doctor.destroy');
+        Route::get('doctor/create', 'DoctorController@create')->name('doctor.create');
+        Route::get('doctor/{id}', 'DoctorController@show')->name('doctor.show');
+        Route::get('doctor/{id}/edit', 'DoctorController@edit')->name('doctor.edit');
+        Route::patch('doctor/{id}', 'DoctorController@update')->name('doctor.update');
+        Route::delete('doctor/{id}', 'DoctorController@destroy')->name('doctor.destroy');
 
     });
 
