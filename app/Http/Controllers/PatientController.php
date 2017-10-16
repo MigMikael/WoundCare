@@ -44,25 +44,54 @@ class PatientController extends Controller
 
         $image = $this->storeImage($patient['profile_image'], 'profile');
         $patient['profile_image'] = $image->id;
-        $patient = Patient::create($patient);
+        Patient::create($patient);
 
-        return redirect()->action('CasesController@create', [
-            'patient_id' => $patient->id
-        ]);
+        return redirect()->action('PatientController@index');
     }
 
     public function edit($id)
     {
+        $patient = Patient::findOrFail($id);
+        $user = User::findOrFail($patient->user_id);
+        $patient['email'] = $user->email;
 
+        return view('patient.edit', ['patient' => $patient]);
     }
 
     public function update(Request $request, $id)
     {
+        $patient = Patient::findOrFail($id);
+        $user = User::findOrFail($patient->user_id);
+
+        $user->email = $request->get('email');
+        $patient->name = $request->get('name');
+        $patient->gender = $request->get('gender');
+        $patient->birthday = $request->get('birthday');
+        $patient->address = $request->get('address');
+        $patient->phone_number = $request->get('phone_number');
+        $patient->congenital_disease = $request->get('congenital_disease');
+        $patient->allergic = $request->get('allergic');
+
+        if($request->hasFile('profile_image')){
+            $image = $this->storeImage($patient['profile_image'], 'profile');
+            $patient->profile_image = $image->id;
+        }
+
+        $user->save();
+        $patient->save();
+
+        return redirect()->action('PatientController@index');
 
     }
 
     public function destroy($id)
     {
+        $patient = Patient::findOrFail($id);
+        $user = User::findOrFail($patient->user_id);
 
+        $patient->delete();
+        $user->delete();
+
+        return redirect()->action('PatientController@index');
     }
 }

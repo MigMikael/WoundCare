@@ -25,7 +25,7 @@ Route::group(['middleware' => 'auth'], function (){
 
     Route::get('doctor', 'DoctorController@index');
 
-    Route::get('patient', 'PatientController@index')->name('patient.index');
+    Route::get('patient', 'PatientController@index');
 
 
     Route::group(['prefix' => 'admin', 'middleware' => 'authAdmin'], function (){
@@ -40,6 +40,15 @@ Route::group(['middleware' => 'auth'], function (){
         Route::get('doctor/{id}/edit', 'DoctorController@edit')->name('doctor.edit');
         Route::patch('doctor/{id}', 'DoctorController@update')->name('doctor.update');
         Route::delete('doctor/{id}', 'DoctorController@destroy')->name('doctor.destroy');
+
+
+        Route::get('patient', 'PatientController@index')->name('patient.index');
+        Route::post('patient', 'PatientController@store')->name('patient.store');
+        Route::get('patient/create', 'PatientController@create')->name('patient.create');
+        Route::get('patient/{id}', 'PatientController@show')->name('patient.show');
+        Route::get('patient/{id}/edit', 'PatientController@edit')->name('patient.edit');
+        Route::patch('patient/{id}', 'PatientController@update')->name('patient.update');
+        Route::delete('patient/{id}', 'PatientController@destroy')->name('patient.destroy');
 
     });
 

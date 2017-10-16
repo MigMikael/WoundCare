@@ -33,7 +33,7 @@
                         </p>
                     </div>
                     <div class="panel-footer">
-                        <a href="{{ url('patient') }}" class="btn btn-success">View</a>
+                        <a href="{{ url('admin/patient') }}" class="btn btn-success">View</a>
                     </div>
                 </div>
             </div>

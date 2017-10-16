@@ -2,7 +2,7 @@
     <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
     <div class="col-md-6">
-        <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+        {{ Form::email('email', null,['class' => 'form-control']) }}
 
         @if ($errors->has('email'))
             <span class="help-block">
@@ -16,7 +16,7 @@
     <label for="name" class="col-md-4 control-label">Name</label>
 
     <div class="col-md-6">
-        <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}">
+        {{ Form::text('name', null,['class' => 'form-control']) }}
 
         @if ($errors->has('name'))
             <span class="help-block">
@@ -30,10 +30,7 @@
     <label for="gender" class="col-md-4 control-label">Gender</label>
 
     <div class="col-md-6">
-        <select class="form-control" id="gender" name="gender">
-            <option>Male</option>
-            <option>Female</option>
-        </select>
+        {{ Form::select('gender', ['Male' => 'Male', 'Female' => 'Female'], null, ['class' => 'form-control','placeholder' => 'Pick gender ...']) }}
         @if ($errors->has('gender'))
             <span class="help-block">
                 <strong>{{ $errors->first('gender') }}</strong>
@@ -46,7 +43,7 @@
     <label for="birthday" class="col-md-4 control-label">Birthday</label>
 
     <div class="col-md-6">
-        <input id="birthday" type="date" class="form-control" name="birthday" value="{{ old('birthday') }}">
+        {{ Form::date('birthday', \Carbon\Carbon::now(), ['class' => 'form-control']) }}
 
         @if ($errors->has('birthday'))
             <span class="help-block">
@@ -60,7 +57,7 @@
     <label for="address" class="col-md-4 control-label">Address</label>
 
     <div class="col-md-6">
-        <textarea class="form-control" rows="5" id="address" name="address">{{ old('address') }}</textarea>
+        {{ Form::textarea('address', null, ['class' => 'form-control', 'row' => '5']) }}
         @if ($errors->has('address'))
             <span class="help-block">
                 <strong>{{ $errors->first('address') }}</strong>
@@ -73,7 +70,7 @@
     <label for="phone_number" class="col-md-4 control-label">Phone Number</label>
 
     <div class="col-md-6">
-        <input id="phone_number" type="text" class="form-control" name="phone_number" value="{{ old('phone_number') }}">
+        {{ Form::text('phone_number', null,['class' => 'form-control']) }}
 
         @if ($errors->has('phone_number'))
             <span class="help-block">
@@ -88,7 +85,7 @@
     <label for="congenital_disease" class="col-md-4 control-label">Congenital Disease</label>
 
     <div class="col-md-6">
-        <input id="congenital_disease" type="text" class="form-control" name="congenital_disease" value="{{ old('congenital_disease') }}">
+        {{ Form::text('congenital_disease', null,['class' => 'form-control']) }}
 
         @if ($errors->has('congenital_disease'))
             <span class="help-block">
@@ -102,7 +99,7 @@
     <label for="allergic" class="col-md-4 control-label">Allergic</label>
 
     <div class="col-md-6">
-        <input id="allergic" type="text" class="form-control" name="allergic" value="{{ old('allergic') }}">
+        {{ Form::text('allergic', null,['class' => 'form-control']) }}
 
         @if ($errors->has('allergic'))
             <span class="help-block">
@@ -151,7 +148,11 @@
 <div class="form-group">
     <div class="col-md-8 col-md-offset-4">
         <button type="submit" class="btn btn-primary">
-            Create
+            @if(Request::is('*/edit'))
+                Finish
+            @else
+                Create
+            @endif
         </button>
     </div>
 </div>
