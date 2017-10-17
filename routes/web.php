@@ -50,6 +50,22 @@ Route::group(['middleware' => 'auth'], function (){
         Route::patch('patient/{id}', 'PatientController@update')->name('patient.update');
         Route::delete('patient/{id}', 'PatientController@destroy')->name('patient.destroy');
 
+
+        Route::get('case', 'CasesController@index')->name('case.index');
+        Route::post('case', 'CasesController@store')->name('case.store');
+        Route::get('case/create', 'CasesController@create')->name('case.create');
+        Route::get('case/{id}', 'CasesController@show')->name('case.show');
+        Route::get('case/{id}/edit', 'CasesController@edit')->name('case.edit');
+        Route::patch('case/{id}', 'CasesController@update')->name('case.update');
+        Route::delete('case/{id}', 'CasesController@destroy')->name('case.destroy');
+
+
+        Route::post('wound', 'WoundController@store')->name('wound.store');
+        Route::get('wound/create/{id}', 'WoundController@create')->name('wound.create');
+        Route::get('wound/{id}', 'WoundController@show')->name('wound.show');
+        Route::get('wound/progress/{id}', 'WoundController@progress')->name('wound.progress');
+
+
     });
 
 
@@ -57,6 +73,8 @@ Route::group(['middleware' => 'auth'], function (){
 
     Doctor Can >>>
     [view profile], [edit profile], [create patient]
+
+    Todo Fix all Doctor Route
 
     */
     Route::group(['middleware' => 'authDoctor'], function (){
@@ -87,8 +105,7 @@ Route::group(['middleware' => 'auth'], function (){
 
         Route::post('cases', 'CasesController@store')->name('case.store');
 
-        Route::get('cases/{id}', 'CasesController@show')->name('case.show');
-
+        Route::get('cases/{id}', 'CasesController@show');
 
         Route::get('wound/create/{id}', 'WoundController@create')->name('wound.create');
 

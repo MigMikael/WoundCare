@@ -45,7 +45,7 @@
                             </div>
                             <div class="col-md-6" style="text-align: left">
                                 <h4>Area : <b>{{ $p->area }}</b></h4>
-                                <a class="btn btn-default" href="{{ url('wound/progress/'.$p->id) }}">
+                                <a class="btn btn-default" href="{{ url('admin/wound/progress/'.$p->id) }}">
                                     Detail
                                 </a>
                             </div>

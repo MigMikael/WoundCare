@@ -34,7 +34,7 @@ class WoundController extends Controller
         ];
         $wound = Wound::create($wound);
 
-        return redirect()->action('CasesController@show', ['id' => $wound->case_id]);
+        return redirect()->route('case.show', ['id' => $wound->case_id]);
     }
 
     public function edit($id)

@@ -49,7 +49,7 @@
                         </p>
                     </div>
                     <div class="panel-footer">
-                        <a href="" class="btn btn-warning">View</a>
+                        <a href="{{ url('admin/case') }}" class="btn btn-warning">View</a>
                     </div>
                 </div>
             </div>

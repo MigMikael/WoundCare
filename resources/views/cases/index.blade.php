@@ -4,9 +4,9 @@
     <div class="container">
         <div class="row well-lg">
             <h1>
-                All Doctor
+                All Case
                 @if(Request::is('admin/*'))
-                    <a href="{{ url('admin/doctor/create') }}" class="btn btn-primary">
+                    <a href="{{ url('admin/case/create') }}" class="btn btn-primary">
                         +
                     </a>
                 @endif
@@ -17,8 +17,8 @@
                 <strong> {{ session('status') }}</strong>
             </div>
         @endif
-        @foreach($doctors as $doctor)
-            @include('doctor._card')
+        @foreach($cases as $case)
+            @include('cases._card')
         @endforeach
     </div>
 @endsection

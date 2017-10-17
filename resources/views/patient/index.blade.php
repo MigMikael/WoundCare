@@ -12,7 +12,11 @@
                 @endif
             </h1>
         </div>
-
+        @if(session('status'))
+            <div class="alert alert-success">
+                <strong> {{ session('status') }}</strong>
+            </div>
+        @endif
         @foreach($patients as $patient)
             @include('patient._card')
         @endforeach

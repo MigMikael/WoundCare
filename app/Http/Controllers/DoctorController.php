@@ -87,7 +87,8 @@ class DoctorController extends Controller
 
         Doctor::create($doctor);
 
-        return redirect()->action('DoctorController@index');
+        return redirect()->action('DoctorController@index')
+            ->with(['status' => 'Create Success']);
     }
 
     public function edit($id)
@@ -115,7 +116,8 @@ class DoctorController extends Controller
         $user->save();
         $doctor->save();
 
-        return redirect()->action('DoctorController@index');
+        return redirect()->action('DoctorController@index')
+            ->with(['status' => 'Update Success']);
     }
 
     public function destroy($id)
@@ -126,7 +128,8 @@ class DoctorController extends Controller
         $doctor->delete();
         $user->delete();
 
-        return redirect()->action('DoctorController@index');
+        return redirect()->action('DoctorController@index')
+            ->with(['status' => 'Delete Success']);
 
     }
 }

@@ -46,7 +46,8 @@ class PatientController extends Controller
         $patient['profile_image'] = $image->id;
         Patient::create($patient);
 
-        return redirect()->action('PatientController@index');
+        return redirect()->action('PatientController@index')
+            ->with(['status' => 'Create Success']);
     }
 
     public function edit($id)
@@ -80,7 +81,8 @@ class PatientController extends Controller
         $user->save();
         $patient->save();
 
-        return redirect()->action('PatientController@index');
+        return redirect()->action('PatientController@index')
+            ->with(['status' => 'Update Success']);
 
     }
 
@@ -92,6 +94,7 @@ class PatientController extends Controller
         $patient->delete();
         $user->delete();
 
-        return redirect()->action('PatientController@index');
+        return redirect()->action('PatientController@index')
+            ->with(['status' => 'Delete Success']);
     }
 }

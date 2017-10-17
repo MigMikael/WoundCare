@@ -8,10 +8,9 @@
                     <div class="panel-heading">Create Case</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('cases') }}"  enctype="multipart/form-data">
-                            {{ csrf_field() }}
-                            @include('cases._form')
-                        </form>
+                        {!! Form::open(['url' => 'admin/case', 'class' => 'form-horizontal', 'files' => 'true']) !!}
+                        @include('cases._form')
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>
