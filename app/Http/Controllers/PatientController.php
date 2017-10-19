@@ -23,9 +23,20 @@ class PatientController extends Controller
         $patient = Patient::findOrFail($id);
         return view('patient.show', ['patient' => $patient]);
     }
-    public function create()
+
+    public function create(Request $request)
     {
-        return view('patient.create');
+        if($request->is('admin/*')){
+            return view('patient.create', [
+                'url' => 'admin/patient'
+            ]);
+        }elseif ($request->is('doctor/*')){
+            return view('patient.create', [
+                'url' => 'doctor/patient'
+            ]);
+        }else{
+            return response()->json(['msg' => 'url pattern not found']);
+        }
     }
 
     public function store(Request $request)
@@ -46,8 +57,15 @@ class PatientController extends Controller
         $patient['profile_image'] = $image->id;
         Patient::create($patient);
 
-        return redirect()->action('PatientController@index')
-            ->with(['status' => 'Create Success']);
+        if($request->is('admin/*')){
+            return redirect()->action('PatientController@index')
+                ->with(['status' => 'Create Success']);
+        }elseif ($request->is('doctor/*')){
+            return redirect()->action('CasesController@create')
+                ->with(['status' => 'Create Success']);
+        }else{
+            return response()->json(['error' => 'url pattern not found']);
+        }
     }
 
     public function edit($id)

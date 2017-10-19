@@ -14,7 +14,11 @@
             </p>
         </div>
         <div class="panel-footer">
-            <a class="btn btn-primary" href="{{ url('admin/wound/'.$wound->id) }}">Healing Progress</a>
+            @if(Request::is('admin/*'))
+                <a class="btn btn-primary" href="{{ url('admin/wound/'.$wound->id) }}">Healing Progress</a>
+            @elseif(Request::is('doctor/*'))
+                <a class="btn btn-primary" href="{{ url('doctor/wound/'.$wound->id) }}">Healing Progress</a>
+            @endif
         </div>
     </div>
 </div>

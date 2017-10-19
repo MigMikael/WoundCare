@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Doctor;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -41,5 +42,18 @@ class HomeController extends Controller
         }
 
         //return view('/home');
+    }
+
+    public function profile($id)
+    {
+        $user = User::findOrFail($id);
+
+        $doctor = Doctor::where('user_id', $id)->first();
+        if (sizeof($doctor) == 1){
+            $doctor['user'] = $user;
+            return $doctor;
+        }else{
+            return $user;
+        }
     }
 }

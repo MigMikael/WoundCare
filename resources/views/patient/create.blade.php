@@ -8,7 +8,7 @@
                     <div class="panel-heading">Create Patient</div>
 
                     <div class="panel-body">
-                        {!! Form::open(['url' => 'admin/patient', 'class' => 'form-horizontal', 'files' => 'true']) !!}
+                        {!! Form::open(['url' => $url, 'class' => 'form-horizontal', 'files' => 'true']) !!}
                         @include('patient._form')
                         {!! Form::close() !!}
                     </div>

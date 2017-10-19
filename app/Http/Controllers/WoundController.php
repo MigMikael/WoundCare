@@ -59,4 +59,9 @@ class WoundController extends Controller
             'p' => $progress
         ]);
     }
+
+    public function createProgress()
+    {
+        return view('progress.create');
+    }
 }

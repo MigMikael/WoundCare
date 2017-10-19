@@ -23,15 +23,26 @@ class CasesController extends Controller
         return view('cases.show', ['c' => $cases]);
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $patients = Patient::pluck('name', 'id');
         $doctors = Doctor::pluck('name', 'id');
 
-        return view('cases.create', [
-            'patients' => $patients,
-            'doctors' => $doctors
-        ]);
+        if($request->is('admin/*')){
+            return view('cases.create', [
+                'url' => 'admin/case',
+                'patients' => $patients,
+                'doctors' => $doctors
+            ]);
+        }elseif ($request->is('doctor/*')){
+            return view('cases.create', [
+                'url' => 'doctor/case',
+                'patients' => $patients,
+                'doctors' => $doctors
+            ]);
+        }else{
+            return response()->json(['msg' => 'url pattern not found']);
+        }
     }
 
     public function store(Request $request)
@@ -45,8 +56,17 @@ class CasesController extends Controller
         ];
         Cases::create($cases);
 
-        return redirect()->action('CasesController@index')
-            ->with(['ststus' => 'Create Success']);
+        if($request->is('admin/*')){
+            return redirect()->action('CasesController@index')
+                ->with(['status' => 'Create Success']);
+
+        }elseif($request->is('doctor/*')){
+            return redirect()->action('DoctorController@dashboard')
+                ->with(['status' => 'Create Success']);
+
+        }else{
+            return response()->json(['msg' => 'url pattern not found']);
+        }
     }
 
     public function edit($id)

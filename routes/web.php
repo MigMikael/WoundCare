@@ -27,6 +27,9 @@ Route::group(['middleware' => 'auth'], function (){
 
     Route::get('patient', 'PatientController@index');
 
+    // profile
+    Route::get('profile/{id}', 'HomeController@profile');
+
 
     Route::group(['prefix' => 'admin', 'middleware' => 'authAdmin'], function (){
 
@@ -63,6 +66,8 @@ Route::group(['middleware' => 'auth'], function (){
         Route::post('wound', 'WoundController@store')->name('wound.store');
         Route::get('wound/create/{id}', 'WoundController@create')->name('wound.create');
         Route::get('wound/{id}', 'WoundController@show')->name('wound.show');
+
+        Route::get('wound/progress/create', 'WoundController@createProgress')->name('progress.create');
         Route::get('wound/progress/{id}', 'WoundController@progress')->name('wound.progress');
 
 
@@ -72,48 +77,39 @@ Route::group(['middleware' => 'auth'], function (){
     /*
 
     Doctor Can >>>
-    [view profile], [edit profile], [create patient]
+    [view profile],     [edit profile],
+    [create patient],   [edit patient],
+    [create case],      [edit case],
+    [create wound],     [edit wound],
 
-    Todo Fix all Doctor Route
+    Todo Fix update & edit route
 
     */
-    Route::group(['middleware' => 'authDoctor'], function (){
+    Route::group(['prefix' => 'doctor','middleware' => 'authDoctor'], function (){
 
         // dashboard
-        Route::get('doctor/dashboard', 'DoctorController@dashboard')->name('doctor.dashboard');
-
-        // profile
-        Route::get('doctor/{id}', 'DoctorController@show')->name('doctor.show');
-
+        Route::get('dashboard', 'DoctorController@dashboard');
         // edit profile
-        Route::get('doctor/{id}/edit', 'DoctorController@edit')->name('doctor.edit');
-
+        Route::get('doctor/{id}/edit', 'DoctorController@edit');
         // update profile
-        Route::patch('doctor', 'DoctorController@update')->name('doctor.update');
+        Route::patch('doctor', 'DoctorController@update');
 
 
 
-        Route::get('patient/create', 'PatientController@create')->name('patient.create');
-
-        Route::post('patient', 'PatientController@store')->name('patient.store');
-
-        Route::get('patient/{id}', 'PatientController@show')->name('patient.show');
+        Route::get('patient/create', 'PatientController@create');
+        Route::post('patient', 'PatientController@store');
+        Route::get('patient/{id}', 'PatientController@show');
 
 
+        Route::get('case/create', 'CasesController@create');
+        Route::post('case', 'CasesController@store');
+        Route::get('case/{id}', 'CasesController@show');
 
-        Route::get('cases/create/{id}', 'CasesController@create')->name('case.create');
 
-        Route::post('cases', 'CasesController@store')->name('case.store');
-
-        Route::get('cases/{id}', 'CasesController@show');
-
-        Route::get('wound/create/{id}', 'WoundController@create')->name('wound.create');
-
-        Route::post('wound', 'WoundController@store')->name('wound.store');
-
-        Route::get('wound/{id}', 'WoundController@show')->name('wound.show');
-
-        Route::get('wound/progress/{id}', 'WoundController@progress')->name('wound.progress');
+        Route::get('wound/create/{id}', 'WoundController@create');
+        Route::post('wound', 'WoundController@store');
+        Route::get('wound/{id}', 'WoundController@show');
+        Route::get('wound/progress/{id}', 'WoundController@progress');
 
     });
 

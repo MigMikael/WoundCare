@@ -36,9 +36,15 @@
             <div class="panel-body">
                 <h1>
                     Wounds
-                    <a class="btn btn-primary btn-lg" href="{{ url('admin/wound/create/'.$c->id) }}">
-                        <i class="fa fa-plus"></i>
-                    </a>
+                    @if(Request::is('admin/*'))
+                        <a class="btn btn-primary btn-lg" href="{{ url('admin/wound/create/'.$c->id) }}">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    @elseif(Request::is('doctor/*'))
+                        <a class="btn btn-primary btn-lg" href="{{ url('doctor/wound/create/'.$c->id) }}">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    @endif
                 </h1>
             </div>
         </div>

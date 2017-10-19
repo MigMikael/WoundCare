@@ -8,7 +8,7 @@
                     <div class="panel-heading">Create Case</div>
 
                     <div class="panel-body">
-                        {!! Form::open(['url' => 'admin/case', 'class' => 'form-horizontal', 'files' => 'true']) !!}
+                        {!! Form::open(['url' => $url, 'class' => 'form-horizontal', 'files' => 'true']) !!}
                         @include('cases._form')
                         {!! Form::close() !!}
                     </div>

@@ -18,7 +18,12 @@
 
         <div class="row">
             <div class="well" style="margin-bottom: 0">
-                <h3>Healing Progress</h3>
+                <h3>
+                    Healing Progress
+                    @if(Request::is('admin/*'))
+                        <a href="{{ url() }}" class="btn btn-primary">+</a>
+                    @endif
+                </h3>
             </div>
             <div class="timeline">
                 @foreach($wound->progress->reverse() as $p)
@@ -45,9 +50,16 @@
                             </div>
                             <div class="col-md-6" style="text-align: left">
                                 <h4>Area : <b>{{ $p->area }}</b></h4>
-                                <a class="btn btn-default" href="{{ url('admin/wound/progress/'.$p->id) }}">
-                                    Detail
-                                </a>
+                                @if(Request::is('admin/*'))
+                                    <a class="btn btn-default" href="{{ url('admin/wound/progress/'.$p->id) }}">
+                                        Detail
+                                    </a>
+                                @elseif(Request::is('doctor/*'))
+                                    <a class="btn btn-default" href="{{ url('doctor/wound/progress/'.$p->id) }}">
+                                        Detail
+                                    </a>
+                                @endif
+
                             </div>
                         </div>
                     </div>

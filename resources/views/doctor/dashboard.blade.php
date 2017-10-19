@@ -19,7 +19,7 @@
             <div class="col-md-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <a class="btn btn-primary btn-block" href="{{ url('patient/create') }}">
+                        <a class="btn btn-primary btn-block" href="{{ url('doctor/patient/create') }}">
                             {{--<h3>Create</h3>--}}
                             <h3><i class="fa fa-plus"></i></h3>
                         </a>
@@ -54,7 +54,7 @@
                     </div>
 
                     <div class="panel-footer">
-                        <a class="btn btn-primary btn-lg" href="{{ url('cases/'.$c->id) }}">
+                        <a class="btn btn-primary btn-lg" href="{{ url('doctor/case/'.$c->id) }}">
                             Detail
                         </a>
                     </div>
@@ -109,10 +109,10 @@
                         </div>
 
                         <div class="panel-footer">
-                            <a class="btn btn-default btn-lg" href="{{ url('patient/'.$c->patient->id) }}">
+                            <a class="btn btn-default btn-lg" href="{{ url('doctor/patient/'.$c->patient->id) }}">
                                 Patient
                             </a>
-                            <a class="btn btn-primary btn-lg" href="{{ url('cases/'.$c->id) }}">
+                            <a class="btn btn-primary btn-lg" href="{{ url('doctor/cases/'.$c->id) }}">
                                 Detail
                             </a>
                         </div>
