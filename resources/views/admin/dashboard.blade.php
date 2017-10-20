@@ -7,7 +7,7 @@
         </div>
         <div class="well col-md-12">
             <div class="col-md-4">
-                <div class="panel panel-info">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h2>Doctor</h2>
                     </div>
@@ -17,7 +17,7 @@
                         </p>
                     </div>
                     <div class="panel-footer">
-                        <a href="{{ url('admin/doctor') }}" class="btn btn-info">View</a>
+                        <a href="{{ url('admin/doctor') }}" class="btn btn-primary">View</a>
                     </div>
                 </div>
             </div>

@@ -69,17 +69,29 @@ class CasesController extends Controller
         }
     }
 
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $patients = Patient::pluck('name', 'id');
         $doctors = Doctor::pluck('name', 'id');
         $case = Cases::findOrFail($id);
 
-        return view('cases.edit', [
-            'case' => $case,
-            'patients' => $patients,
-            'doctors' => $doctors
-        ]);
+        if($request->is('admin/*')){
+            return view('cases.edit', [
+                'url' => 'admin/case/'.$case->id,
+                'case' => $case,
+                'patients' => $patients,
+                'doctors' => $doctors
+            ]);
+        }elseif ($request->is('doctor/*')){
+            return view('cases.edit', [
+                'url' => 'doctor/case/'.$case->id,
+                'case' => $case,
+                'patients' => $patients,
+                'doctors' => $doctors
+            ]);
+        }else{
+            return response()->json(['msg' => 'url pattern not found']);
+        }
     }
 
     public function update(Request $request, $id)
@@ -91,8 +103,17 @@ class CasesController extends Controller
         $case->next_appointment = $request->get('next_date').' '.$request->get('next_time');
         $case->save();
 
-        return redirect()->action('CasesController@index')
-            ->with(['status' => 'Update Success']);
+        if($request->is('admin/*')){
+            return redirect()->action('CasesController@index')
+                ->with(['status' => 'Update Success']);
+
+        }elseif($request->is('doctor/*')){
+            return redirect()->action('DoctorController@dashboard')
+                ->with(['status' => 'Update Success']);
+
+        }else{
+            return response()->json(['msg' => 'url pattern not found']);
+        }
     }
 
     public function destroy($id)

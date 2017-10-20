@@ -2,6 +2,11 @@
 
 @section('content')
     <div class="container">
+        @if(session('status'))
+            <div class="alert alert-success">
+                <strong> {{ session('status') }}</strong>
+            </div>
+        @endif
         <div class="row">
             <div class="col-md-10">
                 <div class="panel panel-default">
@@ -70,8 +75,8 @@
                     <div class="panel-heading">
                         <h1>
                             Diagnosed Cases
-                            <span class="label label-de">
-                            {{ sizeof($doctor->waiting_cases) }}
+                            <span class="label label-default">
+                            {{ sizeof($doctor->diagnosed_cases) }}
                             </span>
 
                             {{--<a class="btn btn-primary btn-lg" href="{{ url('patient/create') }}">

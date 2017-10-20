@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="container">
-
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
@@ -27,6 +26,20 @@
                             <hr>
                             <h1>{{ $c->next_appointment }}</h1>
                         </div>
+                    </div>
+                    <div class="panel-footer">
+                        @if(Request::is('admin/*'))
+                            <a href="{{ url('admin/case/'.$c->id.'/edit') }}" class="btn btn-warning">
+                                Edit
+                            </a>
+                        @elseif(Request::is('doctor/*'))
+                            <a href="{{ url('doctor/case/'.$c->id.'/edit') }}" class="btn btn-warning">
+                                Edit
+                            </a>
+                        @endif
+                        <a class="btn btn-primary btn-lg" href="{{ url('doctor/case/'.$c->id) }}">
+                            Detail
+                        </a>
                     </div>
                 </div>
             </div>

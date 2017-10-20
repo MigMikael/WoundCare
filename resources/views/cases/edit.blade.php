@@ -8,7 +8,7 @@
                     <div class="panel-heading">Edit Case</div>
 
                     <div class="panel-body">
-                        {!! Form::model($case, ['url' => 'admin/case/'.$case->id, 'method' =>'patch', 'class' => 'form-horizontal', 'files' => 'true']) !!}
+                        {!! Form::model($case, ['url' => $url, 'method' =>'patch', 'class' => 'form-horizontal', 'files' => 'true']) !!}
                         @include('cases._form')
                         {!! Form::close() !!}
                     </div>

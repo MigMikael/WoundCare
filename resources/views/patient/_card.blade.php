@@ -13,10 +13,11 @@
             </div>
 
             <div class="panel-footer">
-                <a class="btn btn-primary" href="{{ url('patient/'.$patient->id) }}">
-                    Detail
-                </a>
                 @if(Request::is('admin/*'))
+                    <a class="btn btn-primary" href="{{ url('admin/patient/'.$patient->id) }}">
+                        Detail
+                    </a>
+
                     <a href="{{ url('admin/patient/'.$patient->id.'/edit') }}" class="btn btn-warning">
                         Edit
                     </a>
@@ -24,6 +25,10 @@
                     {!! Form::model($patient, ['url' => 'admin/patient/'.$patient->id, 'method' =>'delete']) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                     {!! Form::close() !!}
+                @elseif(Request::is('doctor/*'))
+                    <a class="btn btn-primary" href="{{ url('doctor/patient/'.$patient->id) }}">
+                        Detail
+                    </a>
                 @endif
             </div>
         </div>
