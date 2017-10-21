@@ -3,16 +3,20 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Diagnose</div>
-
-                    <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('patient') }}"  enctype="multipart/form-data">
-                            {{ csrf_field() }}
-                            @include('progress._form')
-                        </form>
-                    </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1>Diagnose</h1>
+                </div>
+                <div class="panel-body">
+                    <img class="img-responsive" src="{{ url('image/show/'.$progress->image) }}" alt="">
+                    <hr>
+                    <h3>Area :
+                        <b>{{ $progress->area }}</b> cm<sup>2</sup>
+                    </h3>
+                    <hr>
+                    {!! Form::model($progress, ['url' => 'doctor/wound/progress/'.$progress->id.'/diagnose', 'method' =>'patch', 'class' => 'form-horizontal', 'files' => 'true']) !!}
+                    @include('progress._form')
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>

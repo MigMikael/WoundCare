@@ -117,7 +117,7 @@
                             <a class="btn btn-default btn-lg" href="{{ url('doctor/patient/'.$c->patient->id) }}">
                                 Patient
                             </a>
-                            <a class="btn btn-primary btn-lg" href="{{ url('doctor/cases/'.$c->id) }}">
+                            <a class="btn btn-primary btn-lg" href="{{ url('doctor/case/'.$c->id) }}">
                                 Detail
                             </a>
                         </div>

@@ -25,9 +25,13 @@
                 </div>
                 <div class="panel-footer">
                     @if($p->status == 'Diagnosed')
-                        <a class="btn btn-primary" href="">Edit Diagnose</a>
+                        <a class="btn btn-primary" href="{{ url('doctor/wound/progress/'.$p->id.'/diagnose') }}">
+                            Edit Diagnose
+                        </a>
                     @else
-                        <a class="btn btn-primary" href="">Diagnose</a>
+                        <a class="btn btn-primary" href="{{ url('doctor/wound/progress/'.$p->id.'/diagnose') }}">
+                            Diagnose
+                        </a>
                     @endif
                 </div>
             </div>

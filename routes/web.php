@@ -112,6 +112,8 @@ Route::group(['middleware' => 'auth'], function (){
         Route::post('wound', 'WoundController@store');
         Route::get('wound/{id}', 'WoundController@show');
         Route::get('wound/progress/{id}', 'WoundController@progress');
+        Route::get('wound/progress/{id}/diagnose', 'WoundController@diagnoseProgress');
+        Route::patch('wound/progress/{id}/diagnose', 'WoundController@storeDiagnose');
 
     });
 

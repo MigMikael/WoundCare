@@ -64,4 +64,46 @@ class WoundController extends Controller
     {
         return view('progress.create');
     }
+
+    public function storeProgress(Request $request)
+    {
+        $wound_id = $request->get('wound_id');
+        $wound = Wound::findOrFail($wound_id);
+
+        if($request->hasFile('wound_image')){
+            $image = $this->storeImage($request->file('wound_image'), 'profile');
+            $progress = [
+                'wound_id' => $wound->id,
+                'image' => $image->id,
+                'area' => 5555,
+                'status' => 'Waiting'
+            ];
+            Progress::create($progress);
+            return response()->json(['msg' => 'success']);
+
+        }else{
+            return response()->json(['msg' => 'wound image not found']);
+        }
+    }
+
+    public function diagnoseProgress($id){
+        $progress = Progress::findOrFail($id);
+        return view('progress.edit',[
+            'progress' => $progress
+        ]);
+    }
+
+    public function storeDiagnose(Request $request, $id){
+        $progress = Progress::findOrFail($id);
+
+        $progress->comment = $request->get('comment');
+        $progress->advice = $request->get('advice');
+        $progress->status = 'Diagnosed';
+
+        $progress->save();
+
+        return redirect()->action('WoundController@progress', [
+            'id' => $progress->id
+        ]);
+    }
 }
