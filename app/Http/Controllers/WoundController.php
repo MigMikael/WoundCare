@@ -46,7 +46,15 @@ class WoundController extends Controller
         ];
         $wound = Wound::create($wound);
 
-        return redirect()->route('case.show', ['id' => $wound->case_id]);
+        if($request->is('admin/*')){
+            return redirect('admin/case/'.$wound->case_id);
+
+        }elseif ($request->is('doctor/*')){
+            return redirect('doctor/case/'.$wound->case_id);
+
+        }else{
+            return response()->json(['msg' => 'url pattern not found']);
+        }
     }
 
     public function edit($id)
