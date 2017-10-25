@@ -17,9 +17,21 @@ class WoundController extends Controller
         return view('wound.show', ['wound' => $wound]);
     }
 
-    public function create($id)
+    public function create(Request $request, $id)
     {
-        return view('wound.create', ['case_id' => $id]);
+        if($request->is('admin/*')){
+            return view('wound.create', [
+                'case_id' => $id,
+                'url' => 'admin/wound'
+            ]);
+        }elseif ($request->is('doctor/*')){
+            return view('wound.create', [
+                'case_id' => $id,
+                'url' => 'doctor/wound'
+            ]);
+        }else{
+            return response()->json(['msg' => 'url pattern not found']);
+        }
     }
 
     public function store(Request $request)

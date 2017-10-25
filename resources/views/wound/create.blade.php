@@ -8,7 +8,7 @@
                     <div class="panel-heading">Create Wound</div>
 
                     <div class="panel-body">
-                        {!! Form::open(['url' => 'admin/wound', 'class' => 'form-horizontal', 'files' => 'true']) !!}
+                        {!! Form::open(['url' => $url, 'class' => 'form-horizontal', 'files' => 'true']) !!}
                         @include('wound._form')
                         {!! Form::close() !!}
                     </div>
