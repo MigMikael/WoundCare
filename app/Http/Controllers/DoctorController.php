@@ -132,4 +132,30 @@ class DoctorController extends Controller
             ->with(['status' => 'Delete Success']);
 
     }
+
+    public function waitCase($id)
+    {
+        $waiting_cases = 0;
+
+        $doctor = Doctor::where('user_id', $id)->first();
+
+        if(sizeof($doctor) == 1){
+            foreach ($doctor->cases as $c){
+                $is_waiting = false;
+                foreach ($c->wounds as $wound){
+                    foreach ($wound->progress as $p){
+                        if($p->status == 'Waiting'){
+                            $is_waiting = true;
+                        }
+                    }
+                }
+
+                if($is_waiting){
+                    $waiting_cases++;
+                }
+            }
+        }
+
+        return $waiting_cases;
+    }
 }

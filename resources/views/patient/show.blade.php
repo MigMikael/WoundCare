@@ -45,7 +45,11 @@
                     <p>Status : {{ $c->status }}</p>
                     <p>Appointment : {{ $c->next_appointment }}</p>
                     <hr>
-                    <a class="btn btn-primary" href="{{ url('cases/'.$c->id) }}">Detail</a>
+                    @if(Request::is('admin/*'))
+                        <a class="btn btn-primary" href="{{ url('admin/case/'.$c->id) }}">Detail</a>
+                    @elseif(Request::is('doctor/*'))
+                        <a class="btn btn-primary" href="{{ url('doctor/case/'.$c->id) }}">Detail</a>
+                    @endif
                 </div>
             @endforeach
         </div>

@@ -49,6 +49,13 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
+                            <li>
+                                <a href="#">Waiting Case
+                                    <span class="badge noti" style="background: #ff0000;">
+                                        0
+                                    </span>
+                                </a>
+                            </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -76,11 +83,41 @@
                 </div>
             </div>
         </nav>
+        <script
+                src="https://code.jquery.com/jquery-3.2.1.min.js"
+                integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+                crossorigin="anonymous"></script>
+        <script src="//js.pusher.com/3.1/pusher.min.js"></script>
+        <script type="text/javascript">
+
+            $(document).ready(function(){
+                $.ajax({ url: "/doctor/" + {{ Auth::id() }} +"/wait_case",
+                    context: document.body,
+                    success: function(data){
+                        $('.noti').html(data)
+                    }})
+            });
+
+            var pusher = new Pusher('1e4d478aa105544cfa1a', {
+                cluster: 'ap1',
+                encrypted: true
+            });
+
+            // Subscribe to the channel we specified in our Laravel Event
+            var channel = pusher.subscribe('doctor-notification');
+
+            channel.bind('App\\Events\\ReceiveWoundImage', function (data) {
+                var newNotificationHtml = `<b>`+ data.wait_case +`</b>`;
+
+                $('.noti').html(newNotificationHtml);
+            })
+        </script>
 
         @yield('content')
     </div>
 
     <!-- Scripts -->
+
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

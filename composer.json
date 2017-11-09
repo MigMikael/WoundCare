@@ -12,6 +12,7 @@
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.5",
         "orangehill/iseed": "^2.4",
+        "pusher/pusher-php-server": "^3.0",
         "simplesoftwareio/simple-qrcode": "^1.5"
     },
     "require-dev": {

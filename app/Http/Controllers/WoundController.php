@@ -6,6 +6,7 @@ use App\Progress;
 use App\Wound;
 use App\Traits\ImageTrait;
 use Illuminate\Http\Request;
+use App\Events\ReceiveWoundImage;
 
 class WoundController extends Controller
 {
@@ -98,7 +99,11 @@ class WoundController extends Controller
                 'area' => 5555,
                 'status' => 'Waiting'
             ];
-            Progress::create($progress);
+            $progress = Progress::create($progress);
+
+            // Broadcast notification to doctor
+            broadcast(new ReceiveWoundImage($progress))->toOthers();
+
             return response()->json(['msg' => 'success']);
 
         }else{
@@ -121,6 +126,8 @@ class WoundController extends Controller
         $progress->status = 'Diagnosed';
 
         $progress->save();
+
+        broadcast(new ReceiveWoundImage($progress))->toOthers();
 
         return redirect()->action('WoundController@progress', [
             'id' => $progress->id

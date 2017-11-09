@@ -30,6 +30,9 @@ Route::group(['middleware' => 'auth'], function (){
     // profile
     Route::get('profile/{id}', 'HomeController@profile');
 
+    Route::get('test', 'TestController@test');
+    Route::get('send', 'TestController@send');
+
 
     Route::group(['prefix' => 'admin', 'middleware' => 'authAdmin'], function (){
 
@@ -93,6 +96,8 @@ Route::group(['middleware' => 'auth'], function (){
         Route::get('doctor/{id}/edit', 'DoctorController@edit');
         // update profile
         Route::patch('doctor', 'DoctorController@update');
+
+        Route::get('{id}/wait_case', 'DoctorController@waitCase');
 
 
 
