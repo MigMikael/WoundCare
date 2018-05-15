@@ -7,10 +7,25 @@ use App\User;
 use App\Patient;
 use App\Traits\ImageTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PatientController extends Controller
 {
     use ImageTrait;
+
+    public function dashboard()
+    {
+        $user_id = Auth::user()->id;
+
+        $patient = Patient::where('user_id', $user_id)->first();
+
+        foreach ($patient->cases as $case){
+            $case->wounds;
+        }
+
+        #return $patient;
+        return view('patient.dashboard', ['patient' => $patient]);
+    }
 
     public function index()
     {
@@ -114,5 +129,10 @@ class PatientController extends Controller
 
         return redirect()->action('PatientController@index')
             ->with(['status' => 'Delete Success']);
+    }
+
+    public function takeImage($wound_id)
+    {
+        return view('patient.takePic', ['wound_id' => $wound_id]);
     }
 }

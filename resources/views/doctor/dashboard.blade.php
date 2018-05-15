@@ -11,12 +11,12 @@
             <div class="col-md-10">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h1>
+                        <h2>
                             Waiting Cases
                             <span class="label label-danger">
                                 {{ sizeof($doctor->waiting_cases) }}
                             </span>
-                        </h1>
+                        </h2>
                     </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h1>
+                        <h3>
                             Diagnosed Cases
                             <span class="label label-default">
                             {{ sizeof($doctor->diagnosed_cases) }}
@@ -82,7 +82,7 @@
                             {{--<a class="btn btn-primary btn-lg" href="{{ url('patient/create') }}">
                                 <i class="fa fa-plus"></i>
                             </a>--}}
-                        </h1>
+                        </h3>
                     </div>
                 </div>
             </div>

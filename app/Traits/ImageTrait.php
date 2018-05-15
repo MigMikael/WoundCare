@@ -38,7 +38,7 @@ trait ImageTrait
     {
         $size = Storage::disk('local')->size($file->name);
 
-        if (App::environment('local')) {
+        if (false) {
             //windows path
             $img_path = storage_path().'\\app\\'.$file->name;
             $des_path = storage_path().'\\app\\compress_'.$file->name;
@@ -88,7 +88,7 @@ trait ImageTrait
             $constraint->aspectRatio();
         });
 
-        if (App::environment('local')) {
+        if (false) {
             //windows path
             $img->save(storage_path().'\\app\\resize_'.$file->name);
         }else{
