@@ -102,7 +102,7 @@ class WoundController extends Controller
             $progress = Progress::create($progress);
 
             // Broadcast notification to doctor
-            broadcast(new ReceiveWoundImage($progress))->toOthers();
+            #broadcast(new ReceiveWoundImage($progress))->toOthers();
 
             return response()->json(['msg' => 'success']);
 

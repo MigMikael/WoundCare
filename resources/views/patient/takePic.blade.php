@@ -9,7 +9,7 @@
         <div class="panel-body">
             <input name="wound_id" type="hidden" value="{{ $wound_id }}">
             <div class="form-group{{ $errors->has('wound_image') ? ' has-error' : '' }}">
-                <label for="profile_image" class="col-md-4 control-label">Wound Image</label>
+                <label for="wound_image" class="col-md-4 control-label">Wound Image</label>
 
                 <div class="col-md-6">
                     <input id="wound_image" type="file" accept="image/*" class="form-control" name="wound_image" value="{{ old('wound_image') }}">
