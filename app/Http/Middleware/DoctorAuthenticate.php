@@ -19,8 +19,8 @@ class DoctorAuthenticate
     {
         $user_id = Auth::user()->id;
 
-        $doctor = Doctor::where('user_id', $user_id)->first();
-        if (sizeof($doctor) != 1){
+        #$doctor = Doctor::where('user_id', $user_id)->first();
+        if (!Doctor::where('user_id', $user_id)->exists()){
             return response()->json(['msg' => 'request unauthorized 2']);
         }
 

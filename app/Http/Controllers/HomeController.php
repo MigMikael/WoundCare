@@ -33,8 +33,8 @@ class HomeController extends Controller
             return redirect()->action('AdminController@dashboard');
         }
 
-        $doctor = Doctor::where('user_id', $user->id)->first();
-        if (sizeof($doctor) == 1){
+        #$doctor = Doctor::where('user_id', $user->id)->first();
+        if (Doctor::where('user_id', $user->id)->exists()){
             return redirect()->action('DoctorController@dashboard');
         }
         else{
