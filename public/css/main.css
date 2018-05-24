@@ -2,16 +2,55 @@
     background: #ffffff;
 }*/
 
+html, body {
+    /*font-family: 'Prompt', sans-serif;*/
+    font-family: 'Kanit', sans-serif;
+}
+
+.navbar {
+    margin-bottom: 0px;
+}
+
+.container-first {
+    margin-top: 21px;
+}
+
 .panel-heading {
     text-align: left;
+}
+
+.heading-center{
+    text-align: center;
 }
 
 .panel-footer {
     text-align: right;
 }
 
+.footer-center{
+    text-align: center;
+}
+
 .row {
     padding-bottom: 40px;
+}
+
+.row-continue {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.jumbotron-continue {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.profile-img {
+    height: 250px;
+    width: 250px;
+    object-fit: cover;
 }
 
 .timeline {

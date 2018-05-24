@@ -2,6 +2,9 @@
     <label for="original_image" class="col-md-4 control-label">Original Image</label>
 
     <div class="col-md-6">
+        @if(Request::is('*/edit'))
+            <img src="{{ url('image/show/'.$wound->original_image) }}" class="img-responsive img-thumbnail" alt="" height="100">
+        @endif
         <input id="original_image" type="file" class="form-control" name="original_image" value="{{ old('original_image') }}">
 
         @if ($errors->has('original_image'))

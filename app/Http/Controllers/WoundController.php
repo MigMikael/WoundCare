@@ -60,17 +60,52 @@ class WoundController extends Controller
 
     public function edit($id)
     {
+        $wound = Wound::findOrFail($id);
 
+        return view('wound.edit', ['wound' => $wound, 'case_id' => $wound->case_id]);
     }
 
     public function update(Request $request, $id)
     {
+        $wound = Wound::findOrFail($id);
+        $wound->case_id = $request->get('case_id');
+        $wound->site = $request->get('site');
+
+        if($request->hasFile('original_image')){
+            $image = $this->storeImage($request->file('original_image'), 'profile');
+            $wound->original_image = $image->id;
+        }
+
+        $wound->save();
+
+        if($request->is('admin/*')){
+            return redirect('admin/case/'.$wound->case_id);
+
+        }elseif ($request->is('doctor/*')){
+            return redirect('doctor/case/'.$wound->case_id);
+
+        }else{
+            return response()->json(['msg' => 'url pattern not found']);
+        }
 
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+        $wound = Wound::findOrFail($id);
+        $case_id = $wound->case_id;
 
+        $wound->delete();
+
+        if($request->is('admin/*')){
+            return redirect('admin/case/'.$case_id);
+
+        }elseif ($request->is('doctor/*')){
+            return redirect('doctor/case/'.$case_id);
+
+        }else{
+            return response()->json(['msg' => 'url pattern not found']);
+        }
     }
 
     public function progress($id)
@@ -81,9 +116,9 @@ class WoundController extends Controller
         ]);
     }
 
-    public function createProgress()
+    public function createProgress($id)
     {
-        return view('progress.create');
+        return view('progress.create', ['wound_id' => $id]);
     }
 
     public function storeProgress(Request $request)
@@ -109,6 +144,16 @@ class WoundController extends Controller
         }else{
             return response()->json(['msg' => 'wound image not found']);
         }
+    }
+
+    public function editProgress($id)
+    {
+        
+    }
+
+    public function updateProgress(Request $request, $id)
+    {
+        
     }
 
     public function diagnoseProgress($id){

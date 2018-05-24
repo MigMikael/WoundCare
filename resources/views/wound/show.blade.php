@@ -1,17 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container container-first">
         <div class="row" style="padding-bottom: 10px">
             <div class="well col-md-12">
                 <div class="col-md-4">
-                    <img class="img-responsive" src="{{ url('image/show/'.$wound->original_image) }}" alt="">
+                    <img class="img-responsive img-thumbnail profile-img" src="{{ url('image/show/'.$wound->original_image) }}" alt="">
                 </div>
                 <div class="col-md-8">
-                    <h2>Case : {{ $wound->cases->id }}</h2>
+                    <h2>Wound : {{ $wound->id }}</h2>
                     <hr>
+                    <p>Case : {{ $wound->cases->id }}</p>
                     <p>บริเวณแผล : {{ $wound->site }}</p>
-                    <p>สถานะแผล : {{ $wound->status }}</p>
+                    <p>
+                        สถานะแผล :
+                        <span class="label label-warning">{{ $wound->status }}</span>
+                    </p>
                 </div>
             </div>
         </div>
@@ -21,7 +25,7 @@
                 <h3>
                     Healing Progress
                     @if(Request::is('admin/*'))
-                        <a href="{{ url() }}" class="btn btn-primary">+</a>
+                        <a href="{{ url('admin/wound/progress/create/'.$wound->id) }}" class="btn btn-primary">+</a>
                     @endif
                 </h3>
             </div>
@@ -46,7 +50,7 @@
                             <hr>
 
                             <div class="col-md-6">
-                                <img class="img-thumbnail img-responsive" src="{{ url('image/show/'.$p->image) }}">
+                                <img class="img-thumbnail img-responsive profile-img" src="{{ url('image/show/'.$p->image) }}">
                             </div>
                             <div class="col-md-6" style="text-align: left">
                                 <h4>Area : <b>{{ $p->area }}</b></h4>

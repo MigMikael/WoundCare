@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row well-lg">
+    <div class="container container-first">
+        <div class="row well">
             <h1>
                 All Case
                 @if(Request::is('admin/*'))

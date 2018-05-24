@@ -5,13 +5,13 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading text-center">
-                        <h1>Create Case</h1>
+                    <div class="panel-heading">
+                        <h1>Edit Wound</h1>
                     </div>
 
                     <div class="panel-body">
-                        {!! Form::open(['url' => $url, 'class' => 'form-horizontal', 'files' => 'true']) !!}
-                        @include('cases._form')
+                        {!! Form::model($wound, ['url' => 'admin/wound/'.$wound->id, 'method' =>'patch', 'class' => 'form-horizontal', 'files' => 'true']) !!}
+                        @include('wound._form')
                         {!! Form::close() !!}
                     </div>
                 </div>

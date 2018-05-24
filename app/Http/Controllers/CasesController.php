@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Auth;
 
 class CasesController extends Controller
 {
+    public $status = [
+        'healing' => 'Healing',
+        'closed' => 'Closed'
+    ];
+
     public function index()
     {
         $cases = Cases::all();
@@ -51,7 +56,7 @@ class CasesController extends Controller
             'patient_id' => $request->get('patient_id'),
             'doctor_id' => $request->get('doctor_id'),
             'disease' => $request->get('disease'),
-            'status' => 'Healing',
+            'status' => $this->status['healing'],
             'next_appointment' => $request->get('next_date').' '.$request->get('next_time')
         ];
         Cases::create($cases);
@@ -123,5 +128,23 @@ class CasesController extends Controller
 
         return redirect()->action('CasesController@index')
             ->with(['status' => 'Delete Success']);
+    }
+
+    public function changeStatus($id)
+    {
+        $case = Cases::findOrFail($id);
+        $status = '';
+        if($case->status == $this->status['healing']){
+            $case->status = $this->status['closed'];
+            $status = 'Close Case Success';
+        }elseif($case->status == $this->status['closed']){
+            $case->status = $this->status['healing'];
+            $status = 'Reopen Case Success';
+        }
+
+        $case->save();
+
+        return redirect()->action('CasesController@show', ['id' => $case->id])
+            ->with(['status' => $status]);
     }
 }

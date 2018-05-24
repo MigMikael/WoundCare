@@ -51,9 +51,9 @@ class HomeController extends Controller
         $doctor = Doctor::where('user_id', $id)->first();
         if (sizeof($doctor) == 1){
             $doctor['user'] = $user;
-            return $doctor;
+            return view('profile', ['doctor' => $doctor]);
         }else{
-            return $user;
+            return view('profile', ['user' => $user]);
         }
     }
 }

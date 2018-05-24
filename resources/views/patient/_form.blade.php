@@ -2,6 +2,9 @@
     <label for="profile_image" class="col-md-4 control-label">Profile Image</label>
 
     <div class="col-md-6">
+        @if(Request::is('*/edit'))
+            <img src="{{ url('image/show/'.$patient->profile_image) }}" class="img-responsive img-thumbnail" alt="" height="100">
+        @endif
         <input id="profile_image" type="file" class="form-control" name="profile_image" value="{{ old('profile_image') }}">
 
         @if ($errors->has('profile_image'))

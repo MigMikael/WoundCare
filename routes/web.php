@@ -71,10 +71,15 @@ Route::group(['middleware' => 'auth'], function (){
         Route::post('wound', 'WoundController@store');
         Route::get('wound/create/{id}', 'WoundController@create');
         Route::get('wound/{id}', 'WoundController@show');
+        Route::get('wound/{id}/edit', 'WoundController@edit');
+        Route::patch('wound/{id}', 'WoundController@update');
+        Route::delete('wound/{id}', 'WoundController@destroy');
 
-        Route::get('wound/progress/create', 'WoundController@createProgress');
+
+        Route::get('wound/progress/create/{wound_id}', 'PatientController@takeImage');
         Route::get('wound/progress/{id}', 'WoundController@progress');
-
+        Route::get('wound/progress/{id}/edit', 'WoundController@editProgress');
+        Route::patch('wound/progress/{id}', 'WoundController@updateProgress');
 
     });
 
@@ -112,12 +117,15 @@ Route::group(['middleware' => 'auth'], function (){
         Route::post('case', 'CasesController@store');
         Route::get('case/{id}', 'CasesController@show');
         Route::get('case/{id}/edit', 'CasesController@edit');
+        Route::get('case/{id}/status', 'CasesController@changeStatus');
         Route::patch('case/{id}', 'CasesController@update');
 
 
         Route::get('wound/create/{id}', 'WoundController@create');
         Route::post('wound', 'WoundController@store');
         Route::get('wound/{id}', 'WoundController@show');
+
+
         Route::get('wound/progress/{id}', 'WoundController@progress');
         Route::get('wound/progress/{id}/diagnose', 'WoundController@diagnoseProgress');
         Route::patch('wound/progress/{id}/diagnose', 'WoundController@storeDiagnose');

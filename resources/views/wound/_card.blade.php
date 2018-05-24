@@ -18,7 +18,15 @@
         </div>
         <div class="panel-footer">
             @if(Request::is('admin/*'))
-                <a class="btn btn-primary" href="{{ url('admin/wound/'.$wound->id) }}">Healing Progress</a>
+                {!! Form::model($wound, ['url' => 'admin/wound/'.$wound->id, 'method' =>'delete', 'style' => 'display:inline-block']) !!}
+                {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                {!! Form::close() !!}
+                <a class="btn btn-warning" href="{{ url('admin/wound/'.$wound->id.'/edit') }}" style="display: inline-block">
+                    Edit
+                </a>
+                <a class="btn btn-primary" href="{{ url('admin/wound/'.$wound->id) }}" style="display: inline-block">
+                    Healing Progress
+                </a>
             @elseif(Request::is('doctor/*'))
                 <a class="btn btn-primary" href="{{ url('doctor/wound/'.$wound->id) }}">Healing Progress</a>
             @elseif(Request::is('patient/*'))
