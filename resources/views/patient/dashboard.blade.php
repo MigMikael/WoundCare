@@ -1,25 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container container-first">
         @if(session('status'))
             <div class="alert alert-success">
                 <strong> {{ session('status') }}</strong>
             </div>
         @endif
         <div class="row">
-            {{--<div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3>
-                            Case
-                            <span class="label label-default">
-                            {{ sizeof($patient->cases) }}
-                            </span>
-                        </h3>
-                    </div>
-                </div>
-            </div>--}}
             @foreach($patient->cases as $c)
                 <div class="col-md-12">
                     <div class="panel panel-default">

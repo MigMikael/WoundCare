@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container container-first">
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h1>{{ $p->created_at }}</h1>
                 </div>
                 <div class="panel-body">
-                    <img class="img-responsive" src="{{ url('image/show/'.$p->image) }}" alt="">
+                    <img class="img-responsive img-thumbnail profile-img" src="{{ url('image/show/'.$p->image) }}" alt="">
                     <hr>
                     <h3>Area :
                         <b>{{ $p->area }}</b> cm<sup>2</sup>

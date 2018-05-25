@@ -10,7 +10,7 @@
                     <h4>{{ $case->doctor->name }}</h4>
                 </div>
                 <div class="panel-footer">
-                    <a href="" class="btn btn-primary">View</a>
+                    <a href="" class="btn btn-success">View</a>
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="panel panel-success text-center">
+            <div class="panel panel-primary text-center">
                 <div class="panel-heading ">
                     <h3>Patient</h3>
                 </div>
@@ -49,7 +49,7 @@
                     <h4>{{ $case->patient->name }}</h4>
                 </div>
                 <div class="panel-footer">
-                    <a href="" class="btn btn-primary">View</a>
+                    <a href="" class="btn btn-success">View</a>
                 </div>
             </div>
         </div>

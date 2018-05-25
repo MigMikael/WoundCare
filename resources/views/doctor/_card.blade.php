@@ -23,9 +23,11 @@
                     <hr>
                     @foreach($doctor->cases as $c)
                         <div class="col-md-12 col-xs-12">
-                            <span class="label label-default">CASE ID : {{ $c->id }}</span>
-                            Next Appointment : {{ $c->next_appointment }}
-                            <a href="">View</a>
+                            <p>
+                                <span class="label label-default">CASE ID : {{ $c->id }}</span>
+                                Next Appointment : {{ $c->next_appointment }}
+                                <a href="">View</a>
+                            </p>
                         </div>
                     @endforeach
                 </div>

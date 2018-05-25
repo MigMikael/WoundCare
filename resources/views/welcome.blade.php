@@ -3,10 +3,10 @@
 @section('content')
     <div class="container-fluid">
         <div class="row row-continue">
-            <div class="jumbotron jumbotron-continue" style="background-image: url('img/telemedicine.png'); background-repeat: no-repeat; background-size: cover; height: 80vh;color: #000000">
-                <div class="container">
+            <div class="jumbotron jumbotron-continue" style="background-image: url('img/telemedicine.png'); background-repeat: no-repeat; background-size: cover; height: 80vh;">
+                <div class="container" style="background-color: rgba(0,0,0,0.1); padding: 5%">
                     <h1>WoundCare</h1>
-                    <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                    <p>Telemedicine system for monitoring chronic wound, Specifically designed to help both physicians and patients more comfortable.</p>
                     <p><a class="btn btn-success">Learn more</a></p>
                 </div>
             </div>

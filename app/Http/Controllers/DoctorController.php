@@ -23,6 +23,7 @@ class DoctorController extends Controller
 
         $waiting_cases = [];
         $diagnosed_cases = [];
+        $closed_cases = [];
         foreach ($doctor->cases as $c){
             $is_waiting = false;
             foreach ($c->wounds as $wound){
@@ -107,6 +108,7 @@ class DoctorController extends Controller
 
         $user->email = $request->get('email');
         $doctor->name = $request->get('name');
+        $user->name = $request->get('name');
         $doctor->expert = $request->get('expert');
 
         if($request->hasFile('profile_image')){
