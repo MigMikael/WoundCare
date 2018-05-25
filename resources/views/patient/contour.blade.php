@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container container-first">
-        <img src="{{ url('image/show/'.$progress->image) }}" class="img-responsive img-thumbnail profile-img" alt="select contour">
+        <img src="{{ url('contour.jpg') }}" class="img-responsive img-thumbnail profile-img" alt="select contour">
 
         {!! Form::open(['url' => 'api/wound/progress/select_contour', 'class' => 'form-horizontal', 'files' => 'true']) !!}
         <div class="panel panel-default col-md-8 col-md-offset-2">
@@ -11,17 +11,11 @@
             </div>
             <div class="panel-body">
                 <input name="progress_id" type="hidden" value="{{ $progress->id }}">
-                <div class="form-group{{ $errors->has('contour_no') ? ' has-error' : '' }}">
+                <div class="form-group">
                     <label for="contour_no" class="col-md-4 control-label">Ref Contour No</label>
 
                     <div class="col-md-6">
                         {{ Form::text('contour_no', null,['class' => 'form-control']) }}
-
-                        @if ($errors->has('contour_no'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('contour_no') }}</strong>
-                            </span>
-                        @endif
                     </div>
                 </div>
             </div>

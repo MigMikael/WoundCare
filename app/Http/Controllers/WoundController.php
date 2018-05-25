@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Progress;
 use App\Wound;
+use App\Image;
 use App\Traits\ImageTrait;
 use Illuminate\Http\Request;
 use App\Events\ReceiveWoundImage;
+use Log;
 
 class WoundController extends Controller
 {
@@ -139,12 +141,11 @@ class WoundController extends Controller
             // Broadcast notification to doctor
             #broadcast(new ReceiveWoundImage($progress))->toOthers();
 
-            #return response()->json(['msg' => 'success']);
-
             if(env('APP_ENV','local') == 'production'){
                 $root_path = '/var/www/html/WoundCare/';
-
-                system('python3 '. $root_path .'public/identify_contour.py --image '. $root_path .'storage/app/'.$image->name. ' --width 0.9');
+                $command = 'python3 '. $root_path .'public/identify_contour.py --image '. $root_path .'storage/app/'.$image->name. ' --width 0.9';
+                #Log::info($command);
+                system($command);
             }
 
             return view('patient.contour', ['progress' => $progress]);
@@ -155,12 +156,12 @@ class WoundController extends Controller
 
     public function editProgress($id)
     {
-        
+
     }
 
     public function updateProgress(Request $request, $id)
     {
-        
+
     }
 
     public function diagnoseProgress($id){
@@ -188,6 +189,22 @@ class WoundController extends Controller
 
     public function selectContour(Request $request)
     {
+        $progress_id = $request->get('progress_id');
+        $contour_no = $request->get('contour_no');
 
+        if(env('APP_ENV','local') == 'production'){
+            $progress = Progress::findOrFail($progress_id);
+            $image = Image::findOrFail($progress->image);
+
+            $root_path = '/var/www/html/WoundCare/';
+            $command = 'python3 '. $root_path .'public/pixelperinch.py --image '. $root_path .'storage/app/'.$image->name. ' --width 0.9 --contour '.$contour_no;
+            Log::info($command);
+            $real_wound_size = system($command);
+
+            $progress->area = $real_wound_size;
+            $progress->save();
+        }
+
+        return response()->json(['msg' => 'success']);
     }
 }
