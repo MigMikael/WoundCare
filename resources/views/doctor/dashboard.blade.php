@@ -29,10 +29,10 @@
                         </div>
 
                         <div class="panel-body">
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <img src="{{ url('image/show/'.$c->patient->profile_image) }}" class="img-responsive img-thumbnail profile-img" alt="{{ $c->patient->name }}">
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-5">
                                 <h3>{{ $c->patient->name }}</h3>
                                 <p>Tel : {{ $c->patient->phone_number }}</p>
                                 <h4>Disease : <b>{{ $c->disease }}</b></h4>
