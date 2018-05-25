@@ -139,8 +139,15 @@ class WoundController extends Controller
             // Broadcast notification to doctor
             #broadcast(new ReceiveWoundImage($progress))->toOthers();
 
-            return response()->json(['msg' => 'success']);
+            #return response()->json(['msg' => 'success']);
 
+            if(env('APP_ENV','local') == 'production'){
+                $root_path = '/var/www/html/WoundCare/';
+
+                system('python3 '. $root_path .'public/identify_contour.py --image '. $root_path .'storage/app/'.$image->name. ' --width 0.9');
+            }
+
+            return view('patient.contour', ['progress' => $progress]);
         }else{
             return response()->json(['msg' => 'wound image not found']);
         }
@@ -177,5 +184,10 @@ class WoundController extends Controller
         return redirect()->action('WoundController@progress', [
             'id' => $progress->id
         ]);
+    }
+
+    public function selectContour(Request $request)
+    {
+
     }
 }

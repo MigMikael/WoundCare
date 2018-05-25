@@ -7,7 +7,7 @@
                 <div class="col-md-4">
                     <div class="panel panel-success">
                         <div class="panel-body">
-                            <img src="{{ url('image/show/'.$patient->profile_image) }}" class="img-responsive" alt="{{ $patient->name }}">
+                            <img src="{{ url('image/show/'.$patient->profile_image) }}" class="img-responsive img-thumbnail profile-img" alt="{{ $patient->name }}">
                         </div>
                     </div>
                 </div>

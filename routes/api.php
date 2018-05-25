@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('wound/progress/store', 'WoundController@storeProgress');
+Route::post('wound/progress/select_contour', 'WoundController@selectContour');
