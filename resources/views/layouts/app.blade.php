@@ -19,6 +19,7 @@
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Kanit|Prompt" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    @yield('head')
 </head>
 <body>
     <div id="app">
@@ -35,8 +36,9 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                    <a class="navbar-brand contain" href="{{ url('/') }}">
+                        {{--{{ config('app.name', 'Laravel') }}--}}
+                        <img src="{{ url('/img/logo6.png') }}" alt="">
                     </a>
                 </div>
 
@@ -124,6 +126,8 @@
     </div>
 
     <!-- Scripts -->
+
+    @yield('navigation')
 
     <script src="{{ asset('js/app.js') }}"></script>
 </body>

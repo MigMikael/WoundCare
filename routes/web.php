@@ -21,6 +21,8 @@ Route::get('about', function () {
 
 Auth::routes();
 
+Route::get('test', 'TestController@test');
+
 Route::group(['middleware' => 'auth'], function (){
 
     Route::get('/home', 'HomeController@index')->name('home');
@@ -36,7 +38,6 @@ Route::group(['middleware' => 'auth'], function (){
     // profile
     Route::get('profile/{id}', 'HomeController@profile');
 
-    Route::get('test', 'TestController@test');
     Route::get('send', 'TestController@send');
 
 
