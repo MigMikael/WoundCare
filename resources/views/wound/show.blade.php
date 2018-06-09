@@ -8,13 +8,19 @@
                     <img class="img-responsive img-thumbnail profile-img" src="{{ url('image/show/'.$wound->original_image) }}" alt="">
                 </div>
                 <div class="col-md-8">
-                    <h2>Wound : {{ $wound->id }}</h2>
+                    <h1>
+                        <b>{{ $wound->cases->patient->name }} > แผลที่ {{ $wound->id }}</b>
+                    </h1>
                     <hr>
-                    <p>Case : {{ $wound->cases->id }}</p>
-                    <p>บริเวณแผล : {{ $wound->site }}</p>
-                    <p>
-                        สถานะแผล :
+                    <h3>
+                        <b>บริเวณแผล</b> : {{ $wound->site }}
+                    </h3>
+                    <h4>
+                        <b>สถานะแผล</b> :
                         <span class="label label-warning">{{ $wound->status }}</span>
+                    </h4>
+                    <p>
+                        <b>รหัสเคส</b> : {{ $wound->cases->id }}
                     </p>
                 </div>
             </div>
@@ -22,12 +28,12 @@
 
         <div class="row">
             <div class="well" style="margin-bottom: 0">
-                <h3>
-                    Healing Progress
+                <h2>
+                    <b>Healing Progress</b>
                     @if(Request::is('admin/*'))
                         <a href="{{ url('admin/wound/progress/create/'.$wound->id) }}" class="btn btn-primary">+</a>
                     @endif
-                </h3>
+                </h2>
             </div>
             <div class="timeline">
                 @foreach($wound->progress->reverse() as $p)
@@ -53,7 +59,8 @@
                                 <img class="img-thumbnail img-responsive profile-img" src="{{ url('image/show/'.$p->image) }}">
                             </div>
                             <div class="col-md-6" style="text-align: left">
-                                <h4>Area : <b>{{ $p->area }}</b></h4>
+                                <h4>พื้นที่แผล <b>{{ $p->area }}</b> ตารางเซนติเมตร</h4>
+                                <hr>
                                 @if(Request::is('admin/*'))
                                     <a class="btn btn-default" href="{{ url('admin/wound/progress/'.$p->id) }}">
                                         Detail

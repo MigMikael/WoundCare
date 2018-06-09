@@ -1,20 +1,25 @@
 <div class="col-md-4" style="padding: 0">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3>Wound {{ $loop->iteration }}</h3>
+            <h2>
+                <b>แผล {{ $loop->iteration }}</b>
+            </h2>
         </div>
         <div class="panel-body">
             <button type="button" class="btn btn-default btn-sm btn-block" data-toggle="collapse" data-target="#wound{{$wound->id}}">
-                View
+                แสดงภาพ
             </button>
             <div id="wound{{$wound->id}}" class="collapse">
                 <img class="img-responsive img-thumbnail" src="{{ url('image/show/'.$wound->original_image) }}" alt="">
             </div>
             <hr>
-            <p>บริเวณแผล : {{ $wound->site }}</p>
-            <p>สถานะแผล :
+            <h3>
+                <b>บริเวณแผล</b> : {{ $wound->site }}
+            </h3>
+            <h4>
+                <b>สถานะแผล :</b>
                 <span class="label label-warning">{{ $wound->status }}</span>
-            </p>
+            </h4>
         </div>
         <div class="panel-footer">
             @if(Request::is('admin/*'))
@@ -28,9 +33,9 @@
                     Healing Progress
                 </a>
             @elseif(Request::is('doctor/*'))
-                <a class="btn btn-primary" href="{{ url('doctor/wound/'.$wound->id) }}">Healing Progress</a>
+                <a class="btn btn-primary" href="{{ url('doctor/wound/'.$wound->id) }}">สถานะแผล</a>
             @elseif(Request::is('patient/*'))
-                <a class="btn btn-primary" href="{{ url('patient/take_image/'.$wound->id) }}">Take Image</a>
+                <a class="btn btn-primary" href="{{ url('patient/take_image/'.$wound->id) }}">ถ่ายภาพ</a>
             @endif
         </div>
     </div>

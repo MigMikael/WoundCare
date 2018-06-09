@@ -35,8 +35,8 @@
                         <span class="icon-bar"></span>
                     </button>
 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand contain" href="{{ url('/') }}">
+
+                    <a class="navbar-brand contain" href="{{ url('/home') }}">
                         {{--{{ config('app.name', 'Laravel') }}--}}
                         <img src="{{ url('/img/logo6.png') }}" alt="">
                     </a>

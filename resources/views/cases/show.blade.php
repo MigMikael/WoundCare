@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="panel panel-warning">
                     <div class="panel-heading">
-                        <h2>CaseID : <b>{{ $c->id }}</b></h2>
+                        <h1><b>{{ $c->patient->name }}</b></h1>
                     </div>
 
                     <div class="panel-body">
@@ -14,25 +14,31 @@
                             <img class="img-responsive img-thumbnail profile-img" src="{{ url('image/show/'.$c->patient->profile_image) }}" alt="">
                         </div>
                         <div class="col-md-5">
-                            <h3>{{ $c->patient->name }}</h3>
-                            <p>Tel : {{ $c->patient->phone_number }}</p>
-                            <p>Address : {{ $c->patient->address }}</p>
-                            <p>
-                                Doctor : <a href="">{{ $c->doctor->name }}</a>
-                            </p>
-                            <h4>
-                                Status :
+                            <h2>
+                                สถานะ :
                                 @if($c->status == 'Healing')
                                     <span class="label label-warning">{{ $c->status }}</span>
                                 @elseif($c->status == 'Closed')
                                     <span class="label label-default">{{ $c->status }}</span>
                                 @endif
-
-                            </h4>
+                            </h2>
+                            <h3>รหัสเคส : {{ $c->id }}</h3>
+                            <hr>
+                            <p>
+                                <b>โทรศัพท์</b> : {{ $c->patient->phone_number }}
+                            </p>
+                            <p>
+                                <b>ที่อยู่</b> : {{ $c->patient->address }}
+                            </p>
+                            <p>
+                                <b>แพทย์ผู้รับผิดชอบ</b> : <a href="">{{ $c->doctor->name }}</a>
+                            </p>
                             <br>
                         </div>
                         <div class="col-md-4" style="background: rgba(0, 0, 0, 0.05); padding: 2%">
-                            <h4>Next Appointment</h4>
+                            <h4>
+                                <b>นัดหมายครั้งต่อไป</b>
+                            </h4>
                             <hr>
                             <h3>
                                 <b>{{ $c->next_appointment }}</b>
@@ -66,11 +72,9 @@
             </div>
         </div>
 
-        <hr>
-
         <div class="well">
-            <h3>
-                Wounds
+            <h1>
+                <b>บาดแผล</b>
                 @if(Request::is('admin/*'))
                     <a class="btn btn-primary" href="{{ url('admin/wound/create/'.$c->id) }}">
                         <i class="fa fa-plus"></i>
@@ -80,7 +84,7 @@
                         <i class="fa fa-plus"></i>
                     </a>
                 @endif
-            </h3>
+            </h1>
         </div>
 
         <div class="row col-md-12" style="padding-bottom: 10px">
