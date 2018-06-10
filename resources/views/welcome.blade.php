@@ -5,7 +5,9 @@
         <div class="row row-continue">
             <div class="jumbotron jumbotron-continue" style="background-image: url('img/telemedicine.png'); background-repeat: no-repeat; background-size: cover; height: 80vh;">
                 <div class="container" style="background-color: rgba(0,0,0,0.1); padding: 5%">
-                    <h1>WoundSee</h1>
+                    <h1>
+                        <b>WoundSee</b>
+                    </h1>
                     <p>Telemedicine system for monitoring chronic wound, Specifically designed to help both physicians and patients more comfortable.</p>
                     <p><a class="btn btn-success">Learn more</a></p>
                 </div>

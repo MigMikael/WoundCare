@@ -10,7 +10,7 @@
                     </div>
 
                     <div class="panel-body">
-                        {!! Form::model($wound, ['url' => 'admin/wound/'.$wound->id, 'method' =>'patch', 'class' => 'form-horizontal', 'files' => 'true']) !!}
+                        {!! Form::model($wound, ['url' => $url, 'method' =>'patch', 'class' => 'form-horizontal', 'files' => 'true']) !!}
                         @include('wound._form')
                         {!! Form::close() !!}
                     </div>

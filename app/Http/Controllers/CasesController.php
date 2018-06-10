@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\Auth;
 class CasesController extends Controller
 {
     public $status = [
-        'healing' => 'Healing',
-        'closed' => 'Closed'
+        'healing' => 'Healing', // ระหว่างรักษา
+        'closed' => 'Closed'    // ปิดการรักษา
     ];
 
     public function index()

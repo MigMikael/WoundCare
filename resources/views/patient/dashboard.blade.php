@@ -14,7 +14,9 @@
                         <div class="col-md-4" style="padding: 0">
                             <div class="panel panel-primary" id="main-panel">
                                 <div class="panel-heading">
-                                    <h1>แผล {{ $loop->iteration }}</h1>
+                                    <h1>
+                                        <b>แผลที่ {{ $loop->iteration }}</b>
+                                    </h1>
                                 </div>
                                 <div class="panel-body">
                                     <button type="button" class="btn btn-danger btn-block" data-toggle="collapse" data-target="#wound{{$wound->id}}">
@@ -73,7 +75,7 @@
                 <a href="{{ url('patient/dashboard') }}" class="btn btn-danger btn-lg btn-block">หน้าหลัก</a>
             </div>
             <div class="col-md-4 col-xs-3" style="padding-left: 0;padding-right: 0">
-                <a href="" class="btn btn-info btn-lg btn-block">ต่อไป</a>
+                <a href="" class="btn btn-info btn-lg btn-block disabled">ต่อไป</a>
             </div>
         </div>
     </div>

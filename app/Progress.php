@@ -16,4 +16,9 @@ class Progress extends Model
         'advice',
         'status',
     ];
+
+    public function wound()
+    {
+        return $this->belongsTo('App\Wound', 'wound_id');
+    }
 }

@@ -1,5 +1,31 @@
 @extends('layouts.app')
 
+@section('head')
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['เวลา', 'ขนาด (ตร.ซม.)'],
+                @foreach($wound->progress as $p)
+                ['{{ explode(" ", $p->created_at)[0] }}', {{ $p->area }}],
+                @endforeach
+            ]);
+
+            var options = {
+                title: 'ขนาดบาดแผลเรียงตามเวลา',
+                hAxis: {title: 'เวลา',  titleTextStyle: {color: '#333'}},
+                vAxis: {minValue: 0},
+            };
+
+            var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
+@endsection
+
 @section('content')
     <div class="container container-first">
         <div class="row" style="padding-bottom: 10px">
@@ -9,19 +35,38 @@
                 </div>
                 <div class="col-md-8">
                     <h1>
-                        <b>{{ $wound->cases->patient->name }} > แผลที่ {{ $wound->id }}</b>
+                        <b>
+                            <a href="{{ url('doctor/case/'.$wound->cases->id) }}">{{ $wound->cases->patient->name }}</a>
+                            > แผลที่ {{ $wound->id }}
+                        </b>
                     </h1>
-                    <hr>
+                    <hr style="display: block;background-color: #696969;height: 1px">
+                    <h3>
+                        <b>สถานะแผล</b> :
+                        @if($wound->status == 'Healing')
+                        <span class="label label-warning">ระหว่างการรักษา</span>
+                        @else
+                        <span class="label label-default">หาย</span>
+                        @endif
+                    </h3>
                     <h3>
                         <b>บริเวณแผล</b> : {{ $wound->site }}
                     </h3>
-                    <h4>
-                        <b>สถานะแผล</b> :
-                        <span class="label label-warning">{{ $wound->status }}</span>
-                    </h4>
-                    <p>
+                    {{--<h4>
                         <b>รหัสเคส</b> : {{ $wound->cases->id }}
-                    </p>
+                    </h4>--}}
+                    <hr style="display: block;background-color: #696969;height: 1px">
+                    <div class="col-md-12 text-right">
+                        <a href="{{ url('doctor/wound/'.$wound->id.'/status') }}" class="btn btn-primary">
+                            เปลี่ยนสถานะ
+                        </a>
+                        <a href="{{ url('doctor/wound/'.$wound->id.'/edit') }}" class="btn btn-warning">
+                            แก้ไข
+                        </a>
+                        <a href="" class="btn btn-danger">
+                            ลบ
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -34,84 +79,64 @@
                         <a href="{{ url('admin/wound/progress/create/'.$wound->id) }}" class="btn btn-primary">+</a>
                     @endif
                 </h2>
+                <hr>
+                <ul class="nav nav-pills nav-justified">
+                    <li class="active"><a data-toggle="tab" href="#timeline">Timeline</a></li>
+                    <li><a data-toggle="tab" href="#graph">Graph</a></li>
+                </ul>
             </div>
-            <div class="timeline">
-                @foreach($wound->progress->reverse() as $p)
-                    <div class="timeline-block @if($loop->index % 2 == 0) timeline-block-right @else timeline-block-left @endif">
-                        <div class="marker"></div>
-                        <div class="well timeline-content" style="padding: 20px 10px 20px 10px">
-                            <h3 >
-                                {{ $p->created_at }}
-                                @if($p->status == 'Diagnosed')
-                                <span class="label label-success">
-                                    {{ $p->status }}
-                                </span>
-                                @else
-                                <span class="label label-danger">
-                                    {{ $p->status }}
-                                </span>
-                                @endif
 
-                            </h3>
-                            <hr>
+            <div class="tab-content">
+                <div id="timeline" class="tab-pane fade in active">
+                    <div class="timeline">
+                        @foreach($wound->progress->reverse() as $p)
+                            <div class="timeline-block @if($loop->index % 2 == 0) timeline-block-right @else timeline-block-left @endif">
+                                <div class="marker"></div>
+                                <div class="well timeline-content" style="padding: 20px 10px 20px 10px">
+                                    <h3>
+                                        วันที่ <b>{{ explode(" ", $p->created_at)[0] }}</b>&emsp;
+                                        เวลา <b>{{ explode(" ", $p->created_at)[1] }}</b>
+                                    </h3>
+                                    <hr style="display: block;background-color: #696969;height: 1px">
+                                    <div class="col-md-6">
+                                        <img class="img-thumbnail img-responsive profile-img" src="{{ url('image/show/'.$p->image) }}">
+                                    </div>
+                                    <div class="col-md-6" style="text-align: right">
+                                        <h3>ขนาด &nbsp; <b>{{ $p->area }}</b>&nbsp; cm<sup>2</sup></h3>
+                                        <h2>
+                                            @if($p->status == 'Diagnosed')
+                                            <span class="label label-success">
+                                                วินิจฉัยแล้ว
+                                            </span>
+                                            @else
+                                            <span class="label label-danger">
+                                                รอวินิจฉัย
+                                            </span>
+                                            @endif
+                                        </h2>
+                                        <hr>
+                                        @if(Request::is('admin/*'))
+                                            <a class="btn btn-primary" href="{{ url('admin/wound/progress/'.$p->id) }}">
+                                                รายละเอียด
+                                            </a>
+                                        @elseif(Request::is('doctor/*'))
+                                            <a class="btn btn-primary" href="{{ url('doctor/wound/progress/'.$p->id) }}">
+                                                รายละเอียด
+                                            </a>
+                                        @endif
 
-                            <div class="col-md-6">
-                                <img class="img-thumbnail img-responsive profile-img" src="{{ url('image/show/'.$p->image) }}">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-6" style="text-align: left">
-                                <h4>พื้นที่แผล <b>{{ $p->area }}</b> ตารางเซนติเมตร</h4>
-                                <hr>
-                                @if(Request::is('admin/*'))
-                                    <a class="btn btn-default" href="{{ url('admin/wound/progress/'.$p->id) }}">
-                                        Detail
-                                    </a>
-                                @elseif(Request::is('doctor/*'))
-                                    <a class="btn btn-default" href="{{ url('doctor/wound/progress/'.$p->id) }}">
-                                        Detail
-                                    </a>
-                                @endif
-
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
-                @endforeach
-            </div>
-
-
-            {{--@foreach($wound->progress as $p)
-            <div class="col-md-2 hidden-xs" style="margin: 0;padding: 0">
-                @if($loop->first)
-                    <img class="img-responsive img-thumbnail" src="{{ URL::asset('images/start2.png') }}" alt="">
-                @elseif($loop->last)
-                    <img class="img-responsive img-thumbnail" src="{{ URL::asset('images/end1.png') }}" alt="">
-                @else
-                    <img class="img-responsive img-thumbnail" src="{{ URL::asset('images/between1.png') }}" alt="">
-                @endif
-            </div>
-            <div class="well col-md-10" style="margin: 0">
-                <div class="col-md-4">
-                    <img class="img-responsive" src="{{ url('image/show/'.$p->image) }}">
                 </div>
-                <div class="col-md-6">
-                    <h4><b>{{ $p->created_at  }}</b></h4>
-                    <hr>
-                    <p>พื้นที่แผล : {{ $p->area }} ตร.ซม.</p>
-                    <p>comment : {{ $p->comment }}</p>
-                    <p>advice : {{ $p->advice }}</p>
-                </div>
-                <div class="col-md-2">
-                    @if($p->status == 'Diagnosed')
-                    <button class="btn btn-success btn-lg">
-                        <i class="fa fa-check-circle"></i>
-                    </button>
-                    @else
-                    <button class="btn btn-danger btn-lg">
-                        <i class="fa fa-times-circle"></i>
-                    </button>
-                    @endif
+                <div id="graph" class="tab-pane fade">
+                    <div class="well">
+                        <div id="chart_div" style="width: 100%; min-height: 500px;"></div>
+                    </div>
                 </div>
             </div>
-            @endforeach--}}
         </div>
     </div>
 @endsection

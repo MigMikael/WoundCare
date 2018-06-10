@@ -1,5 +1,5 @@
 <div class="col-md-4" style="padding: 0">
-    <div class="panel panel-default">
+    <div class="panel @if($wound->status == 'Healing') panel-warning @else panel-default @endif">
         <div class="panel-heading">
             <h2>
                 <b>แผล {{ $loop->iteration }}</b>
@@ -18,7 +18,11 @@
             </h3>
             <h4>
                 <b>สถานะแผล :</b>
-                <span class="label label-warning">{{ $wound->status }}</span>
+                @if($wound->status == 'Healing')
+                    <span class="label label-warning">ระหว่างการรักษา</span>
+                @else
+                    <span class="label label-default">หาย</span>
+                @endif
             </h4>
         </div>
         <div class="panel-footer">
@@ -33,7 +37,7 @@
                     Healing Progress
                 </a>
             @elseif(Request::is('doctor/*'))
-                <a class="btn btn-primary" href="{{ url('doctor/wound/'.$wound->id) }}">สถานะแผล</a>
+                <a class="btn btn-primary" href="{{ url('doctor/wound/'.$wound->id) }}">รายละเอียด</a>
             @elseif(Request::is('patient/*'))
                 <a class="btn btn-primary" href="{{ url('patient/take_image/'.$wound->id) }}">ถ่ายภาพ</a>
             @endif

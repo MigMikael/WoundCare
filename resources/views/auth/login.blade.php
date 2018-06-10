@@ -6,7 +6,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading text-center">
-                    <h1>Login</h1>
+                    <h1>เข้าสู่ระบบ</h1>
                 </div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
@@ -53,7 +53,7 @@
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Login
+                                    เข้าสู่ระบบ
                                 </button>
 
                                 <a class="btn btn-link" href="{{ route('password.request') }}">

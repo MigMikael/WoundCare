@@ -65,6 +65,18 @@ html, body {
     object-fit: cover;
 }
 
+.tab-content > .tab-pane,
+.pill-content > .pill-pane {
+    display: block;
+    height: 0;
+    overflow-y: hidden;
+}
+
+.tab-content > .active,
+.pill-content, .active {
+    height: auto;
+}
+
 .timeline {
     width: 90%;
     padding: 50px 0;

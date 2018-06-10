@@ -112,7 +112,6 @@ Route::group(['middleware' => 'auth'], function (){
         Route::get('{id}/wait_case', 'DoctorController@waitCase');
 
 
-
         Route::get('patient/create', 'PatientController@create');
         Route::post('patient', 'PatientController@store');
         Route::get('patient/{id}', 'PatientController@show');
@@ -129,6 +128,9 @@ Route::group(['middleware' => 'auth'], function (){
         Route::get('wound/create/{id}', 'WoundController@create');
         Route::post('wound', 'WoundController@store');
         Route::get('wound/{id}', 'WoundController@show');
+        Route::get('wound/{id}/edit', 'WoundController@edit');
+        Route::get('wound/{id}/status', 'WoundController@changeStatus');
+        Route::patch('wound/{id}', 'WoundController@update');
 
 
         Route::get('wound/progress/{id}', 'WoundController@progress');

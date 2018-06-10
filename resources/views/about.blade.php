@@ -3,7 +3,9 @@
 @section('content')
     <div class="container container-first">
         <div class="row well">
-            <h1>About WoundSee</h1>
+            <h1>
+                <b>About WoundSee</b>
+            </h1>
         </div>
 
         <div class="row well" style="font-size: larger">
@@ -17,7 +19,9 @@
         </div>
 
         <div class="row well">
-            <h2>Developer</h2>
+            <h1>
+                <b>ผู้พัฒนา</b>
+            </h1>
         </div>
 
         <div class="row well col-md-12">

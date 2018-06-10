@@ -48,14 +48,16 @@
                 </div>
             </div>
         </div>
-        <hr>
+        <br>
+        <br>
         <div class="row">
             <div class="well">
-                <h3>Patient Case</h3>
+                <h3>เคสของผู้ป่วย</h3>
             </div>
             @if(sizeof($patient->cases) > 0)
                 @foreach($patient->cases as $c)
                     <div class="well col-md-12">
+                        <p>แพทย์ผู้ดูแล : {{ $c->doctor->name }}</p>
                         <p>Disease : {{ $c->disease }}</p>
                         <p>Status : {{ $c->status }}</p>
                         <p>Appointment : {{ $c->next_appointment }}</p>

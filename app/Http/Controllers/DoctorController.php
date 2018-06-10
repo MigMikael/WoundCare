@@ -25,6 +25,10 @@ class DoctorController extends Controller
         $diagnosed_cases = [];
         $closed_cases = [];
         foreach ($doctor->cases as $c){
+            if ($c->status == 'Closed') {
+                array_push($closed_cases, Cases::find($c->id));
+                continue;
+            }
             $is_waiting = false;
             foreach ($c->wounds as $wound){
                 foreach ($wound->progress as $p){
@@ -42,6 +46,7 @@ class DoctorController extends Controller
         }
         $doctor['waiting_cases'] = $waiting_cases;
         $doctor['diagnosed_cases'] = $diagnosed_cases;
+        $doctor['closed_cases'] = $closed_cases;
 
         return view('doctor.dashboard', [
             'doctor' => $doctor

@@ -52,13 +52,13 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ url('about') }}">About</a></li>
-                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ url('about') }}">เกี่ยวกับ</a></li>
+                            <li><a href="{{ route('login') }}">เข้าสู่ระบบ</a></li>
                             {{--<li><a href="{{ route('register') }}">Register</a></li>--}}
                         @else
                             @if(Request::is('doctor/*'))
                             <li>
-                                <a href="#">Waiting Case
+                                <a href="{{ url('home') }}">Waiting Case
                                     <span class="badge noti" style="background: #ff0000;">
                                         0
                                     </span>

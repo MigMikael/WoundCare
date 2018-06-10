@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Patient;
 use App\Progress;
 use App\Wound;
 use App\Image;
@@ -13,6 +14,11 @@ use Log;
 class WoundController extends Controller
 {
     use ImageTrait;
+
+    public $status = [
+        'healing' => 'Healing', // ระหว่างรักษา
+        'healed' => 'Healed'    // หายแล้ว
+    ];
 
     public function show($id)
     {
@@ -60,11 +66,25 @@ class WoundController extends Controller
         }
     }
 
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $wound = Wound::findOrFail($id);
 
-        return view('wound.edit', ['wound' => $wound, 'case_id' => $wound->case_id]);
+        if($request->is('admin/*')){
+            return view('wound.edit', [
+                'wound' => $wound,
+                'case_id' => $wound->case_id,
+                'url' => 'admin/wound/'.$wound->id
+            ]);
+        }elseif ($request->is('doctor/*')){
+            return view('wound.edit', [
+                'wound' => $wound,
+                'case_id' => $wound->case_id,
+                'url' => 'doctor/wound/'.$wound->id
+            ]);
+        }else{
+            return response()->json(['msg' => 'url pattern not found']);
+        }
     }
 
     public function update(Request $request, $id)
@@ -81,10 +101,10 @@ class WoundController extends Controller
         $wound->save();
 
         if($request->is('admin/*')){
-            return redirect('admin/case/'.$wound->case_id);
+            return redirect('admin/wound/'.$wound->id);
 
         }elseif ($request->is('doctor/*')){
-            return redirect('doctor/case/'.$wound->case_id);
+            return redirect('doctor/wound/'.$wound->id);
 
         }else{
             return response()->json(['msg' => 'url pattern not found']);
@@ -108,6 +128,20 @@ class WoundController extends Controller
         }else{
             return response()->json(['msg' => 'url pattern not found']);
         }
+    }
+
+    public function changeStatus($id)
+    {
+        $wound = Wound::findOrFail($id);
+        if($wound->status == $this->status['healing']){
+            $wound->status = $this->status['healed'];
+        }elseif($wound->status == $this->status['healed']){
+            $wound->status = $this->status['healing'];
+        }
+
+        $wound->save();
+
+        return redirect()->action('WoundController@show', ['id' => $wound->id]);
     }
 
     public function progress($id)
