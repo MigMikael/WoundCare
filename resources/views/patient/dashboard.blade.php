@@ -12,7 +12,7 @@
                 <div class="col-md-12">
                     <div class="well" style="background-color: rgb(44, 62, 80); color: #ffffff">
                         <h3>
-                            <b>{{ $c->id }}) {{ $c->patient->name }}</b>
+                            <b>เคส {{ $c->id }} {{ $c->patient->name }}</b>
                         </h3>
                     </div>
                 </div>

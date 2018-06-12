@@ -28,8 +28,10 @@ trait ImageTrait
 
         $file = Image::create($fileRecord);
 
-        self::compress($file);
-        self::resizeImage($file, $type);
+        if ($type != 'wound') {
+            self::compress($file);
+            self::resizeImage($file, $type);
+        }
 
         return $file;
     }

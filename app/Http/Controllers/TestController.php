@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Progress;
 use App\Events\ReceiveWoundImage;
+use App\User;
 use Illuminate\Http\Request;
 
 class TestController extends Controller
@@ -22,7 +23,9 @@ class TestController extends Controller
         ];
         $progress = Progress::create($progress);
 
-        broadcast(new ReceiveWoundImage($progress))->toOthers();
+        $user = \Auth::user();
+
+        broadcast(new ReceiveWoundImage($progress, $user))->toOthers();
 
         return "Event has been sent! ". $progress->id;
     }

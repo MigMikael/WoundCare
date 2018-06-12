@@ -17,15 +17,18 @@ class ReceiveWoundImage implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $progress;
+    public $user;
 
     /**
      * Create a new event instance.
      *
      * @param $progress
+     * @param $user
      */
-    public function __construct($progress)
+    public function __construct($progress, $user)
     {
         $this->progress = $progress;
+        $this->user = $user;
     }
 
     /**
@@ -42,7 +45,7 @@ class ReceiveWoundImage implements ShouldBroadcast
     {
         $waiting_cases = 0;
 
-        $user_id = \Auth::id();
+        $user_id = $this->user->id;
         $doctor = Doctor::where('user_id', $user_id)->first();
 
         if(sizeof($doctor) == 1){

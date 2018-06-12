@@ -30,7 +30,7 @@
         <div class="row" style="padding-bottom: 10px">
             <div class="well col-md-12">
                 <div class="col-md-4">
-                    <img class="img-responsive img-thumbnail profile-img" src="{{ url('image/show/'.$wound->original_image) }}" alt="">
+                    <img class="img-responsive img-thumbnail large-img" src="{{ url('image/show/'.$wound->original_image) }}" alt="">
                 </div>
                 <div class="col-md-8">
                     <h1>
@@ -100,14 +100,16 @@
                             <div class="timeline-block @if($loop->index % 2 == 0) timeline-block-right @else timeline-block-left @endif" id="progress{{$p->id}}">
                                 <div class="marker"></div>
                                 <div class="well timeline-content" style="padding: 20px 10px 20px 10px">
-                                    <h3>
+                                    <h3 style="display: inline-block">
                                         วันที่ <b>{{ explode(" ", $p->created_at)[0] }}</b>&emsp;
+                                    </h3>
+                                    <h3 style="display: inline-block">
                                         เวลา <b>{{ explode(" ", $p->created_at)[1] }}</b>
                                     </h3>
                                     <hr style="display: block;background-color: #696969;height: 1px">
                                     <div class="col-md-6 wound-img-container">
                                         <a href="{{ url('image/show/'.$p->image) }}" target="_blank">
-                                            <img class="img-thumbnail img-responsive profile-img" src="{{ url('image/show/'.$p->image) }}">
+                                            <img class="img-thumbnail img-responsive large-img" src="{{ url('image/show/'.$p->image) }}">
                                             <div class="overlay">
                                                 <div class="overlay-text">แสดงภาพ</div>
                                             </div>

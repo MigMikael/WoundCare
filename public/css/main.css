@@ -1,10 +1,49 @@
-/*.well {
+ /*.well {
     background: #ffffff;
 }*/
+* {
+    /*font-family: 'Prompt', sans-serif;*/
+    font-family: 'Kanit', sans-serif !important;
+}
+
+code,
+kbd,
+pre,
+.img-rounded,
+.img-thumbnail,
+.img-circle,
+.form-control,
+/*.btn,*/
+.btn-link,
+.dropdown-menu,
+.list-group-item,
+.input-group-addon,
+.input-group-btn,
+.nav-tabs a,
+.nav-pills a,
+.navbar,
+.navbar-toggle,
+.icon-bar,
+.breadcrumb,
+.pagination,
+.pager *,
+.label,
+.badge,
+.jumbotron,
+.thumbnail,
+.alert,
+.progress,
+.panel,
+.well,
+.modal-content,
+.tooltip-inner,
+.popover,
+.popover-title,
+.carousel-indicators li {
+     border-radius:0 !important;
+ }
 
 html, body {
-    /*font-family: 'Prompt', sans-serif;*/
-    font-family: 'Kanit', sans-serif;
     background: #101010;
 }
 
@@ -62,6 +101,12 @@ html, body {
 .profile-img {
     height: 250px;
     width: 250px;
+    object-fit: cover;
+}
+
+.large-img {
+    height: 100%;
+    width: 100%;
     object-fit: cover;
 }
 

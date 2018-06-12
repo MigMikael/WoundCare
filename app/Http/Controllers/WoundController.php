@@ -163,11 +163,11 @@ class WoundController extends Controller
         $wound = Wound::findOrFail($wound_id);
 
         if($request->hasFile('wound_image')){
-            $image = $this->storeImage($request->file('wound_image'), 'profile');
+            $image = $this->storeImage($request->file('wound_image'), 'wound');
             $progress = [
                 'wound_id' => $wound->id,
                 'image' => $image->id,
-                'area' => 5555,
+                'area' => 0,
                 'status' => 'Waiting'
             ];
             $progress = Progress::create($progress);
@@ -176,10 +176,20 @@ class WoundController extends Controller
             #broadcast(new ReceiveWoundImage($progress))->toOthers();
 
             if(env('APP_ENV','local') == 'production'){
+                # Ubuntu Machine
                 $root_path = '/var/www/html/WoundCare/';
-                $command = 'python3 '. $root_path .'public/identify_contour.py --image '. $root_path .'storage/app/'.$image->name. ' --width 0.9';
-                #Log::info($command);
+                $command = 'python3 '. $root_path .'public/identify_contour.py --image '. $root_path .'storage/app/'.$image->name . ' 2>&1';
+                Log::info($command);
                 system($command);
+            }else{
+                # Windows Machine
+                $root_path = 'C:\\Users\\Mig\\Documents\\LaravelProject\\WoundCare\\';
+                $command = 'python '. $root_path .'public\\identify_contour.py --image '.$root_path . 'storage\\app\\'.$image->name. ' 2>&1';
+                Log::info('Windows Machine');
+                Log::info($command);
+
+                $last_line = system($command);
+                Log::info($last_line);
             }
 
             return view('patient.contour', ['progress' => $progress]);
@@ -228,14 +238,32 @@ class WoundController extends Controller
         $progress = Progress::findOrFail($progress_id);
 
         if(env('APP_ENV','local') == 'production'){
+            # Ubuntu Machine
             $image = Image::findOrFail($progress->image);
 
             $root_path = '/var/www/html/WoundCare/';
-            $command = 'python3 '. $root_path .'public/pixelperinch.py --image '. $root_path .'storage/app/'.$image->name. ' --width 0.9 --contour '.$contour_no;
+            $command = 'python3 '. $root_path .'public/pixelperinch.py --image '. $root_path .'storage/app/'.$image->name. ' --width 3 --contour '.$contour_no . '  2>&1';
             Log::info($command);
             $real_wound_size = system($command);
 
             $progress->area = $real_wound_size;
+            $progress->save();
+        }else{
+            # Windows Machine
+            $image = Image::findOrFail($progress->image);
+            $root_path = 'C:\\Users\\Mig\\Documents\\LaravelProject\\WoundCare\\';
+
+            $command = 'python '. $root_path .'public\\pixelpercm.py --image '. $root_path .'storage\\app\\'.$image->name. ' --width 5 --contour '.$contour_no . '  2>&1';
+            Log::info($command);
+            $pixel_per_cm = system($command);
+            Log::info('Pixel per cm : '.$pixel_per_cm);
+
+            $command2 = 'python '. $root_path .'public\\predictor.py --model ' . $root_path . 'public\\model1.model --image ' . $root_path . 'storage\\app\\'.$image->name. ' 2>&1';
+            Log::info($command2);
+            $pixel = system($command2);
+            Log::info('Pixel : '.$pixel);
+
+            $progress->area = $pixel / $pixel_per_cm;
             $progress->save();
         }
 

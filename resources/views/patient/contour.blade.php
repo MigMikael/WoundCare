@@ -8,13 +8,13 @@
             {!! Form::open(['url' => 'api/wound/progress/select_contour', 'class' => 'form-horizontal', 'files' => 'true']) !!}
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h1>เลือกบริเวณวงกลมสีน้ำเงิน</h1>
+                    <h1>เลือกหมายเลขที่ปรากฏในสี่เหลี่ยมสีน้ำเงิน</h1>
                 </div>
                 <div class="panel-body">
                     <input name="progress_id" type="hidden" value="{{ $progress->id }}">
                     <div class="form-group">
                         <label for="contour_no" class="col-md-4 control-label">
-                            หมายเลขวงกลมสีน้ำเงิน
+                            หมายเลข
                         </label>
 
                         <div class="col-md-6">
