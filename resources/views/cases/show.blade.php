@@ -19,9 +19,9 @@
                             <h2>
                                 สถานะ :
                                 @if($c->status == 'Healing')
-                                    <span class="label label-warning">{{ $c->status }}</span>
+                                    <span class="label label-warning">ระหว่างการรักษา</span>
                                 @elseif($c->status == 'Closed')
-                                    <span class="label label-default">{{ $c->status }}</span>
+                                    <span class="label label-default">ปิดการรักษา</span>
                                 @endif
                             </h2>
                             <hr>

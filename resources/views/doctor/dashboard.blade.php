@@ -49,13 +49,19 @@
                                     </div>
                                     <div class="col-md-4">
                                         <h4>
+                                            <b>สถานะเคส</b> :
+                                            @if($c->status == 'Healing')
+                                                <span class="label label-warning">ระหว่างการรักษา</span>
+                                            @elseif($c->status == 'Closed')
+                                                <span class="label label-default">ปิดการรักษา</span>
+                                            @endif
+                                        </h4>
+                                        <hr>
+                                        <h4>
                                             <b>โทรศัพท์</b> : {{ $c->patient->phone_number }}
                                         </h4>
                                         <h4>
                                             <b>โรค</b> : {{ $c->disease }}
-                                        </h4>
-                                        <h4>
-                                            <b>สถานะเคส</b> : <span class="label label-warning">{{ $c->status }}</span>
                                         </h4>
                                     </div>
                                     <div class="col-md-5" style="background: rgba(0, 0, 0, 0.05); padding: 2%">
@@ -111,13 +117,19 @@
                                     </div>
                                     <div class="col-md-4">
                                         <h4>
+                                            <b>สถานะเคส</b> :
+                                            @if($c->status == 'Healing')
+                                                <span class="label label-warning">ระหว่างการรักษา</span>
+                                            @elseif($c->status == 'Closed')
+                                                <span class="label label-default">ปิดการรักษา</span>
+                                            @endif
+                                        </h4>
+                                        <hr>
+                                        <h4>
                                             <b>โทรศัพท์</b> : {{ $c->patient->phone_number }}
                                         </h4>
                                         <h4>
                                             <b>โรค</b> : {{ $c->disease }}
-                                        </h4>
-                                        <h4>
-                                            <b>สถานะเคส</b> : <span class="label label-warning">{{ $c->status }}</span>
                                         </h4>
                                     </div>
                                     <div class="col-md-5" style="background: rgba(0, 0, 0, 0.05); padding: 2%">
@@ -176,13 +188,19 @@
                                     </div>
                                     <div class="col-md-4">
                                         <h4>
+                                            <b>สถานะเคส</b> :
+                                            @if($c->status == 'Healing')
+                                                <span class="label label-warning">ระหว่างการรักษา</span>
+                                            @elseif($c->status == 'Closed')
+                                                <span class="label label-default">ปิดการรักษา</span>
+                                            @endif
+                                        </h4>
+                                        <hr>
+                                        <h4>
                                             <b>โทรศัพท์</b> : {{ $c->patient->phone_number }}
                                         </h4>
                                         <h4>
                                             <b>โรค</b> : {{ $c->disease }}
-                                        </h4>
-                                        <h4>
-                                            <b>สถานะเคส</b> : <span class="label label-warning">{{ $c->status }}</span>
                                         </h4>
                                     </div>
                                     <div class="col-md-5" style="background: rgba(0, 0, 0, 0.05); padding: 2%">

@@ -33,7 +33,10 @@ Route::group(['middleware' => 'auth'], function (){
 
     Route::get('patient', 'PatientController@index');
     Route::get('patient/dashboard', 'PatientController@dashboard');
-    Route::get('patient/take_image/{wound_id}', 'PatientController@takeImage');
+    Route::get('patient/take_image/{id}', 'PatientController@takeImage');
+
+    Route::get('patient/wound/{id}', 'WoundController@show');
+    Route::get('patient/wound/progress/{id}', 'WoundController@progress');
 
     // profile
     Route::get('profile/{id}', 'HomeController@profile');

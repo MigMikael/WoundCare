@@ -15,7 +15,6 @@
             ]);
 
             var options = {
-                title: 'ขนาดบาดแผลเรียงตามเวลา',
                 hAxis: {title: 'เวลา',  titleTextStyle: {color: '#333'}},
                 vAxis: {minValue: 0},
             };
@@ -36,8 +35,14 @@
                 <div class="col-md-8">
                     <h1>
                         <b>
+                            @if(Request::is('admin/*'))
+                            <a href="{{ url('admin/case/'.$wound->cases->id) }}">{{ $wound->cases->patient->name }}</a>
+                            @elseif(Request::is('doctor/*'))
                             <a href="{{ url('doctor/case/'.$wound->cases->id) }}">{{ $wound->cases->patient->name }}</a>
-                            > แผลที่ {{ $wound->id }}
+                            @else
+                            <a href="{{ url('patient/dashboard') }}">{{ $wound->cases->patient->name }}</a>
+                            @endif
+                            > แผล {{ $wound->id }}
                         </b>
                     </h1>
                     <hr style="display: block;background-color: #696969;height: 1px">
@@ -55,6 +60,7 @@
                     {{--<h4>
                         <b>รหัสเคส</b> : {{ $wound->cases->id }}
                     </h4>--}}
+                    @if(Request::is('admin/*') or Request::is(('doctor/*')))
                     <hr style="display: block;background-color: #696969;height: 1px">
                     <div class="col-md-12 text-right">
                         <a href="{{ url('doctor/wound/'.$wound->id.'/status') }}" class="btn btn-primary">
@@ -67,6 +73,7 @@
                             ลบ
                         </a>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -90,7 +97,7 @@
                 <div id="timeline" class="tab-pane fade in active">
                     <div class="timeline">
                         @foreach($wound->progress->reverse() as $p)
-                            <div class="timeline-block @if($loop->index % 2 == 0) timeline-block-right @else timeline-block-left @endif">
+                            <div class="timeline-block @if($loop->index % 2 == 0) timeline-block-right @else timeline-block-left @endif" id="progress{{$p->id}}">
                                 <div class="marker"></div>
                                 <div class="well timeline-content" style="padding: 20px 10px 20px 10px">
                                     <h3>
@@ -98,8 +105,13 @@
                                         เวลา <b>{{ explode(" ", $p->created_at)[1] }}</b>
                                     </h3>
                                     <hr style="display: block;background-color: #696969;height: 1px">
-                                    <div class="col-md-6">
-                                        <img class="img-thumbnail img-responsive profile-img" src="{{ url('image/show/'.$p->image) }}">
+                                    <div class="col-md-6 wound-img-container">
+                                        <a href="{{ url('image/show/'.$p->image) }}" target="_blank">
+                                            <img class="img-thumbnail img-responsive profile-img" src="{{ url('image/show/'.$p->image) }}">
+                                            <div class="overlay">
+                                                <div class="overlay-text">แสดงภาพ</div>
+                                            </div>
+                                        </a>
                                     </div>
                                     <div class="col-md-6" style="text-align: right">
                                         <h3>ขนาด &nbsp; <b>{{ $p->area }}</b>&nbsp; cm<sup>2</sup></h3>
@@ -123,6 +135,10 @@
                                             <a class="btn btn-primary" href="{{ url('doctor/wound/progress/'.$p->id) }}">
                                                 รายละเอียด
                                             </a>
+                                        @elseif(Request::is('patient/*'))
+                                            <a class="btn btn-primary" href="{{ url('patient/wound/progress/'.$p->id) }}">
+                                                รายละเอียด
+                                            </a>
                                         @endif
 
                                     </div>
@@ -131,12 +147,52 @@
                         @endforeach
                     </div>
                 </div>
-                <div id="graph" class="tab-pane fade">
+                <div id="graph" class="tab-pane fade text-center">
                     <div class="well">
+                        <h1>ขนาดบาดแผลตามเวลา</h1>
+                        <br>
                         <div id="chart_div" style="width: 100%; min-height: 500px;"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+@endsection
+
+@section('navigation2')
+    @if(Request::is('patient/*'))
+    <div class="nav-footer">
+        <div class="col-md-12 col-xs-12" style="padding-bottom: 10px;padding-top: 10px">
+            <div class="col-md-6 col-xs-6">
+                <button class="btn btn-default btn-block" type="button" onclick="smaller_size()">
+                    ลดอักษร
+                </button>
+            </div>
+            <div class="col-md-6 col-xs-6">
+                <button class="btn btn-default btn-block" type="button" onclick="larger_size()">
+                    ขยายอักษร
+                </button>
+            </div>
+            <script>
+                function smaller_size() {
+                    document.getElementById("main-panel").style.fontSize = "medium";
+                }
+                function larger_size() {
+                    document.getElementById("main-panel").style.fontSize = "xx-large";
+                }
+            </script>
+        </div>
+        <div class="col-md-12 col-xs-12">
+            <div class="col-md-4 col-xs-3" style="padding-left: 0;padding-right: 0">
+                <a href="{{ URL::previous() }}" class="btn btn-info btn-lg btn-block">กลับ</a>
+            </div>
+            <div class="col-md-4 col-xs-6">
+                <a href="{{ url('home') }}" class="btn btn-danger btn-lg btn-block">หน้าหลัก</a>
+            </div>
+            <div class="col-md-4 col-xs-3" style="padding-left: 0;padding-right: 0">
+                <a href="" class="btn btn-info btn-lg btn-block disabled">ต่อไป</a>
+            </div>
+        </div>
+    </div>
+    @endif
 @endsection

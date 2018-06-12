@@ -6,6 +6,7 @@ use App\Helper\TokenGenerator;
 use App\User;
 use App\Patient;
 use App\Traits\ImageTrait;
+use App\Wound;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -131,8 +132,9 @@ class PatientController extends Controller
             ->with(['status' => 'Delete Success']);
     }
 
-    public function takeImage($wound_id)
+    public function takeImage($id)
     {
-        return view('patient.takePic', ['wound_id' => $wound_id]);
+        $wound = Wound::findOrFail($id);
+        return view('patient.takePic', ['wound' => $wound]);
     }
 }

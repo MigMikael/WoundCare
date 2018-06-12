@@ -13,7 +13,9 @@
                 <div class="panel-body">
                     <input name="progress_id" type="hidden" value="{{ $progress->id }}">
                     <div class="form-group">
-                        <label for="contour_no" class="col-md-4 control-label">Ref Contour No</label>
+                        <label for="contour_no" class="col-md-4 control-label">
+                            หมายเลขวงกลมสีน้ำเงิน
+                        </label>
 
                         <div class="col-md-6">
                             {{ Form::text('contour_no', null,['class' => 'form-control']) }}

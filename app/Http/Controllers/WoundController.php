@@ -225,9 +225,9 @@ class WoundController extends Controller
     {
         $progress_id = $request->get('progress_id');
         $contour_no = $request->get('contour_no');
+        $progress = Progress::findOrFail($progress_id);
 
         if(env('APP_ENV','local') == 'production'){
-            $progress = Progress::findOrFail($progress_id);
             $image = Image::findOrFail($progress->image);
 
             $root_path = '/var/www/html/WoundCare/';
@@ -239,6 +239,7 @@ class WoundController extends Controller
             $progress->save();
         }
 
-        return response()->json(['msg' => 'success']);
+        return redirect(url('patient/wound/'.$progress->wound->id.'/#progress'.$progress_id));
+        //return response()->json(['msg' => 'success']);
     }
 }

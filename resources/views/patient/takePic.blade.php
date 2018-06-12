@@ -7,10 +7,17 @@
                 {!! Form::open(['url' => 'api/wound/progress/store', 'class' => 'form-horizontal', 'files' => 'true']) !!}
                 <div class="panel panel-primary" id="main-panel">
                     <div class="panel-heading">
-                        <h1>ถ่ายรูปแผล</h1>
+                        <h1>
+                            <b>
+                                <a href="{{ url('patient/dashboard') }}">
+                                    แผลที่ {{ $wound->id }}
+                                </a>
+                                > ถ่ายรูปแผล
+                            </b>
+                        </h1>
                     </div>
                     <div class="panel-body">
-                        <input name="wound_id" type="hidden" value="{{ $wound_id }}">
+                        <input name="wound_id" type="hidden" value="{{ $wound->id }}">
                         <div class="form-group{{ $errors->has('wound_image') ? ' has-error' : '' }}">
                             <label for="profile_image" class="col-md-4 control-label">กดที่นี่เพื่อถ่ายรูป</label>
 
@@ -41,7 +48,7 @@
     </div>
 @endsection
 
-@section('navigation')
+@section('navigation2')
     <div class="nav-footer">
         <div class="col-md-12 col-xs-12" style="padding-bottom: 10px;padding-top: 10px">
             <div class="col-md-6 col-xs-6">

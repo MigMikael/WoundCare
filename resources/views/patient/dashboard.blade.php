@@ -10,12 +10,20 @@
         <div class="row" style="padding-bottom: 140px">
             @foreach($patient->cases as $c)
                 <div class="col-md-12">
+                    <div class="well" style="background-color: rgb(44, 62, 80); color: #ffffff">
+                        <h3>
+                            <b>{{ $c->id }}) {{ $c->patient->name }}</b>
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
                     @foreach($c->wounds as $wound)
                         <div class="col-md-4" style="padding: 0">
                             <div class="panel panel-primary" id="main-panel">
                                 <div class="panel-heading">
                                     <h1>
-                                        <b>แผลที่ {{ $loop->iteration }}</b>
+                                        <b>แผล {{ $loop->iteration }}</b>
                                     </h1>
                                 </div>
                                 <div class="panel-body">
@@ -27,12 +35,20 @@
                                     </div>
                                     <hr>
                                     <h2>บริเวณแผล : {{ $wound->site }}</h2>
-                                    <p>สถานะแผล :
-                                        <span class="label label-warning">{{ $wound->status }}</span>
+                                    <p>
+                                        <b>สถานะแผล</b> :
+                                        @if($wound->status == 'Healing')
+                                            <span class="label label-warning">ระหว่างการรักษา</span>
+                                        @else
+                                            <span class="label label-default">หาย</span>
+                                        @endif
                                     </p>
                                 </div>
                                 <div class="panel-footer">
-                                    <a class="btn btn-primary btn-lg" href="{{ url('patient/take_image/'.$wound->id) }}">
+                                    <a href="{{ url('patient/wound/'.$wound->id) }}" class="btn btn-default btn-lg">
+                                        รายละเอียด
+                                    </a>
+                                    <a href="{{ url('patient/take_image/'.$wound->id) }}" class="btn btn-primary btn-lg">
                                         ถ่ายรูปแผล
                                     </a>
                                 </div>
@@ -45,7 +61,7 @@
     </div>
 @endsection
 
-@section('navigation')
+@section('navigation2')
     <div class="nav-footer">
         <div class="col-md-12 col-xs-12" style="padding-bottom: 10px;padding-top: 10px">
             <div class="col-md-6 col-xs-6">
@@ -72,7 +88,7 @@
                 <a href="{{ URL::previous() }}" class="btn btn-info btn-lg btn-block">กลับ</a>
             </div>
             <div class="col-md-4 col-xs-6">
-                <a href="{{ url('patient/dashboard') }}" class="btn btn-danger btn-lg btn-block">หน้าหลัก</a>
+                <a href="{{ url('home') }}" class="btn btn-danger btn-lg btn-block">หน้าหลัก</a>
             </div>
             <div class="col-md-4 col-xs-3" style="padding-left: 0;padding-right: 0">
                 <a href="" class="btn btn-info btn-lg btn-block disabled">ต่อไป</a>
