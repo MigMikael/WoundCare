@@ -36,6 +36,22 @@ trait ImageTrait
         return $file;
     }
 
+    public function storeImage2($file)
+    {
+        $name = time().'.'.$file->getClientOriginalExtension();
+        $destinationPath = storage_path('app');
+        $file->move($destinationPath, $name);
+
+        $fileRecord = [
+            'name' => $name,
+            'mime' => $file->getClientMimeType(),
+            'original_name' => $file->getClientOriginalName(),
+        ];
+
+        $file = Image::create($fileRecord);
+        return $file;
+    }
+
     public function compress($file)
     {
         $size = Storage::disk('local')->size($file->name);

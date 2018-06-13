@@ -45,13 +45,13 @@
                 </div>
                 <div class="panel-body">
                     <div class="col-md-4">
-                        <img class="img-responsive img-thumbnail profile-img" src="{{ url('image/show/'.$p->image) }}" alt="">
+                        <img class="img-responsive img-thumbnail large-img" src="{{ url('image/show/'.$p->image) }}" alt="">
                     </div>
                     <div class="col-md-8">
-                        <h2>
+                        <h1 style="font-size: larger">
                             ขนาดแผล :
                             <b>{{ $p->area }}</b> cm<sup>2</sup>
-                        </h2>
+                        </h1>
                     </div>
                     <div class="col-md-12">
                         <br>

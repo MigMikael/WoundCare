@@ -41,7 +41,7 @@ color_list = []
 count = 1
 
 for c in cnts:
-    if cv2.contourArea(c) < 600:
+    if cv2.contourArea(c) < 1000:
         continue
 
     r = int(random.random() * 256)

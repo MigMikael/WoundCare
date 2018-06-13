@@ -3,7 +3,7 @@
 @section('content')
     <div class="container container-first">
         <div class="col-md-12">
-            <img src="{{ url('contour.jpg') }}" class="img-responsive img-thumbnail profile-img" alt="select contour" style="width: 100%;height: 100%">
+            <img src="{{ url('contour.jpg') }}" class="img-responsive img-thumbnail contour-img" alt="select contour">
 
             {!! Form::open(['url' => 'api/wound/progress/select_contour', 'class' => 'form-horizontal', 'files' => 'true']) !!}
             <div class="panel panel-primary">
@@ -18,7 +18,7 @@
                         </label>
 
                         <div class="col-md-6">
-                            {{ Form::text('contour_no', null,['class' => 'form-control']) }}
+                            {{ Form::select('contour_no', $contour, null, ['class' => 'form-control form-control-lg']) }}
                         </div>
                     </div>
                 </div>

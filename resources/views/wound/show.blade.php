@@ -27,8 +27,8 @@
 
 @section('content')
     <div class="container container-first">
-        <div class="row" style="padding-bottom: 10px">
-            <div class="well col-md-12">
+        <div class="col-md-12" style="padding-bottom: 10px">
+            <div class="row well">
                 <div class="col-md-4">
                     <img class="img-responsive img-thumbnail large-img" src="{{ url('image/show/'.$wound->original_image) }}" alt="">
                 </div>
@@ -36,11 +36,11 @@
                     <h1>
                         <b>
                             @if(Request::is('admin/*'))
-                            <a href="{{ url('admin/case/'.$wound->cases->id) }}">{{ $wound->cases->patient->name }}</a>
+                                <a href="{{ url('admin/case/'.$wound->cases->id) }}">{{ $wound->cases->patient->name }}</a>
                             @elseif(Request::is('doctor/*'))
-                            <a href="{{ url('doctor/case/'.$wound->cases->id) }}">{{ $wound->cases->patient->name }}</a>
+                                <a href="{{ url('doctor/case/'.$wound->cases->id) }}">{{ $wound->cases->patient->name }}</a>
                             @else
-                            <a href="{{ url('patient/dashboard') }}">{{ $wound->cases->patient->name }}</a>
+                                <a href="{{ url('patient/dashboard') }}">{{ $wound->cases->patient->name }}</a>
                             @endif
                             > แผล {{ $wound->id }}
                         </b>
@@ -49,9 +49,9 @@
                     <h3>
                         <b>สถานะแผล</b> :
                         @if($wound->status == 'Healing')
-                        <span class="label label-warning">ระหว่างการรักษา</span>
+                            <span class="label label-warning">ระหว่างการรักษา</span>
                         @else
-                        <span class="label label-default">หาย</span>
+                            <span class="label label-default">หาย</span>
                         @endif
                     </h3>
                     <h3>
@@ -61,30 +61,37 @@
                         <b>รหัสเคส</b> : {{ $wound->cases->id }}
                     </h4>--}}
                     @if(Request::is('admin/*') or Request::is(('doctor/*')))
-                    <hr style="display: block;background-color: #696969;height: 1px">
-                    <div class="col-md-12 text-right">
-                        <a href="{{ url('doctor/wound/'.$wound->id.'/status') }}" class="btn btn-primary">
-                            เปลี่ยนสถานะ
-                        </a>
-                        <a href="{{ url('doctor/wound/'.$wound->id.'/edit') }}" class="btn btn-warning">
-                            แก้ไข
-                        </a>
-                        <a href="" class="btn btn-danger">
-                            ลบ
-                        </a>
-                    </div>
+                        <hr style="display: block;background-color: #696969;height: 1px">
+                        <div class="col-md-12 text-right">
+                            <a href="{{ url('admin/wound/progress/create/'.$wound->id) }}" class="btn btn-default">
+                                เพิ่มรูปแผล
+                            </a>
+                            <a href="{{ url('doctor/wound/'.$wound->id.'/status') }}" class="btn btn-primary">
+                                เปลี่ยนสถานะ
+                            </a>
+                            <a href="{{ url('doctor/wound/'.$wound->id.'/edit') }}" class="btn btn-warning">
+                                แก้ไข
+                            </a>
+                            <a href="" class="btn btn-danger">
+                                ลบ
+                            </a>
+                        </div>
+                    @elseif(Request::is('patient/*'))
+                        <hr style="display: block;background-color: #696969;height: 1px">
+                        <div class="col-md-12 text-right">
+                            <a href="{{ url('/patient/take_image/'.$wound->id) }}" class="btn btn-primary btn-lg">
+                                ถ่ายรูปแผล
+                            </a>
+                        </div>
                     @endif
                 </div>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row col-md-12">
             <div class="well" style="margin-bottom: 0">
                 <h2>
                     <b>Healing Progress</b>
-                    @if(Request::is('admin/*'))
-                        <a href="{{ url('admin/wound/progress/create/'.$wound->id) }}" class="btn btn-primary">+</a>
-                    @endif
                 </h2>
                 <hr>
                 <ul class="nav nav-pills nav-justified">
@@ -116,7 +123,7 @@
                                         </a>
                                     </div>
                                     <div class="col-md-6" style="text-align: right">
-                                        <h3>ขนาด &nbsp; <b>{{ $p->area }}</b>&nbsp; cm<sup>2</sup></h3>
+                                        <h1>ขนาด &nbsp; <b>{{ $p->area }}</b>&nbsp; cm<sup>2</sup></h1>
                                         <h2>
                                             @if($p->status == 'Diagnosed')
                                             <span class="label label-success">

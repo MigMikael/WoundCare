@@ -166,8 +166,10 @@ class WoundController extends Controller
             Log::info('Has Wound Image');
         }
 
+        $contour_num = '';
+
         if($request->has('wound_image')){
-            $image = $this->storeImage($request->file('wound_image'), 'wound');
+            $image = $this->storeImage2($request->file('wound_image'));
             $progress = [
                 'wound_id' => $wound->id,
                 'image' => $image->id,
@@ -181,10 +183,12 @@ class WoundController extends Controller
 
             if(env('APP_ENV','local') == 'production'){
                 # Ubuntu Machine
+                /*
                 $root_path = '/var/www/html/WoundCare/';
                 $command = 'python3 '. $root_path .'public/identify_contour.py --image '. $root_path .'storage/app/'.$image->name . ' 2>&1';
                 Log::info($command);
                 system($command);
+                */
             }else{
                 # Windows Machine
                 $root_path = 'C:\\Users\\Mig\\Documents\\LaravelProject\\WoundCare\\';
@@ -192,11 +196,14 @@ class WoundController extends Controller
                 Log::info('Windows Machine');
                 Log::info($command);
 
-                $last_line = system($command);
-                Log::info($last_line);
+                $contour_num = system($command);
+                Log::info('Contour Num : '. $contour_num);
             }
-
-            return view('patient.contour', ['progress' => $progress]);
+            $contour_list = [];
+            for ($i=1; $i <= intval($contour_num); $i++){
+                $contour_list[$i] = $i;
+            }
+            return view('patient.contour', ['progress' => $progress, 'contour' => $contour_list]);
         }else{
             return response()->json(['msg' => 'wound image not found']);
         }
@@ -243,6 +250,7 @@ class WoundController extends Controller
 
         if(env('APP_ENV','local') == 'production'){
             # Ubuntu Machine
+            /*
             $image = Image::findOrFail($progress->image);
 
             $root_path = '/var/www/html/WoundCare/';
@@ -252,6 +260,7 @@ class WoundController extends Controller
 
             $progress->area = $real_wound_size;
             $progress->save();
+            */
         }else{
             # Windows Machine
             $image = Image::findOrFail($progress->image);

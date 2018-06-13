@@ -25,9 +25,9 @@
                                 <input id="wound_image" type="file" accept="image/*" class="form-control" name="wound_image" value="{{ old('wound_image') }}" placeholder="กดที่นี่เพื่อถ่ายรูปแผล" multiple>
 
                                 @if ($errors->has('wound_image'))
-                                    <span class="help-block">
-                                <strong>{{ $errors->first('wound_image') }}</strong>
-                            </span>
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('wound_image') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>

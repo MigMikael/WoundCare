@@ -1,47 +1,10 @@
- /*.well {
-    background: #ffffff;
-}*/
 * {
     /*font-family: 'Prompt', sans-serif;*/
-    font-family: 'Kanit', sans-serif !important;
+    /*font-family: 'Kanit', sans-serif !important;*/
+    /*font-family: 'Pridi', serif !important;*/
+    font-family: 'Taviraj', serif !important;
+    border-radius:0 !important;
 }
-
-code,
-kbd,
-pre,
-.img-rounded,
-.img-thumbnail,
-.img-circle,
-.form-control,
-/*.btn,*/
-.btn-link,
-.dropdown-menu,
-.list-group-item,
-.input-group-addon,
-.input-group-btn,
-.nav-tabs a,
-.nav-pills a,
-.navbar,
-.navbar-toggle,
-.icon-bar,
-.breadcrumb,
-.pagination,
-.pager *,
-.label,
-.badge,
-.jumbotron,
-.thumbnail,
-.alert,
-.progress,
-.panel,
-.well,
-.modal-content,
-.tooltip-inner,
-.popover,
-.popover-title,
-.carousel-indicators li {
-     border-radius:0 !important;
- }
 
 html, body {
     background: #101010;
@@ -64,6 +27,12 @@ html, body {
 
 .container-first {
     margin-top: 21px;
+}
+
+input {
+    color: #000000 !important;
+    font: bold !important;
+    font-size: 18px !important;
 }
 
 .panel-heading {
@@ -108,6 +77,11 @@ html, body {
     height: 100%;
     width: 100%;
     object-fit: cover;
+}
+
+.contour-img {
+    width: 100%;
+    object-fit: contain;
 }
 
 .tab-content > .tab-pane,
@@ -182,7 +156,7 @@ html, body {
 .timeline-content {
     width: 95%;
     padding: 0 15px;
-    color: #666
+    color: #000000
 }
 
 .timeline-content h3 {
@@ -197,6 +171,10 @@ html, body {
     line-height: 1.5em;
     word-spacing: 1px;
     color: #888;
+}
+
+select {
+    font-size: 20pt;
 }
 
 @media screen and (max-width: 768px) {

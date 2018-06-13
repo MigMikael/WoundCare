@@ -34,9 +34,10 @@ cnts = cnts[0] if imutils.is_cv2() else cnts[1]
 orig = image.copy()
 color_list = []
 count = 1
+contour_no = []
 
 for c in cnts:
-    if cv2.contourArea(c) < 600:
+    if cv2.contourArea(c) < 1000:
         continue
 
     r = int(random.random() * 256)
@@ -50,9 +51,12 @@ for c in cnts:
 
     cv2.drawContours(orig, [c], -1, (b, g, r), 2)
     cv2.putText(orig, str(count), (cX, cY), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 3)
+
+    contour_no.append(count)
     count += 1
 
 # cv2.imwrite('/var/www/html/WoundCare/public/contour.jpg', orig)
+print(count - 1)
 cv2.imwrite('contour.jpg', orig)
 # -------------------------------------------------------------------------------------
 # print("Finish")

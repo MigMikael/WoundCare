@@ -1,4 +1,4 @@
-<div class="col-md-4" style="padding: 0">
+<div class="col-md-4" style="padding: 5px">
     <div class="panel @if($wound->status == 'Healing') panel-warning @else panel-default @endif">
         <div class="panel-heading">
             <h2>

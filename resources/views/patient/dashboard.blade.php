@@ -10,16 +10,24 @@
         <div class="row" style="padding-bottom: 140px">
             @foreach($patient->cases as $c)
                 <div class="col-md-12">
-                    <div class="well" style="background-color: rgb(44, 62, 80); color: #ffffff">
-                        <h3>
+                    <div class="well" style="background-color: rgb(44, 62, 80); color: #ffffff;margin: 5px">
+                        <h2 style="display: inline-block">
                             <b>เคส {{ $c->id }} {{ $c->patient->name }}</b>
-                        </h3>
+                        </h2>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <h4 style="display: inline-block">
+                            @if($c->status == 'Healing')
+                                <span class="label label-warning">ระหว่างการรักษา</span>
+                            @elseif($c->status == 'Closed')
+                                <span class="label label-default">ปิดการรักษา</span>
+                            @endif
+                        </h4>
                     </div>
                 </div>
 
                 <div class="col-md-12">
                     @foreach($c->wounds as $wound)
-                        <div class="col-md-4 col-sm-6" style="padding: 0">
+                        <div class="col-md-4 col-sm-6" style="padding: 5px">
                             <div class="panel panel-primary" id="main-panel">
                                 <div class="panel-heading">
                                     <h1>

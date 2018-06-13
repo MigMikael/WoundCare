@@ -69,7 +69,7 @@
             </div>
         </div>
 
-        <div class="well">
+        <div class="well" style="margin: 5px">
             <h1 style="display: inline-block">
                 <b>บาดแผล</b>
             </h1>
