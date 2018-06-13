@@ -22,7 +22,7 @@
                             <label for="profile_image" class="col-md-4 control-label">กดที่นี่เพื่อถ่ายรูป</label>
 
                             <div class="col-md-6">
-                                <input id="wound_image" type="file" accept="image/*" class="form-control" name="wound_image" value="{{ old('wound_image') }}" placeholder="กดที่นี่เพื่อถ่ายรูปแผล">
+                                <input id="wound_image" type="file" accept="image/*" class="form-control" name="wound_image" value="{{ old('wound_image') }}" placeholder="กดที่นี่เพื่อถ่ายรูปแผล" multiple>
 
                                 @if ($errors->has('wound_image'))
                                     <span class="help-block">
@@ -31,15 +31,16 @@
                                 @endif
                             </div>
                         </div>
-                    </div>
-                    <div class="panel-footer">
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary btn-lg">
+                                <button type="submit" value="Submit" class="btn btn-primary btn-lg">
                                     ต่อไป
                                 </button>
                             </div>
                         </div>
+                    </div>
+                    <div class="panel-footer">
+
                     </div>
                 </div>
                 {!! Form::close() !!}

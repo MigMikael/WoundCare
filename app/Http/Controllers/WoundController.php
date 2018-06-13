@@ -162,7 +162,11 @@ class WoundController extends Controller
         $wound_id = $request->get('wound_id');
         $wound = Wound::findOrFail($wound_id);
 
-        if($request->hasFile('wound_image')){
+        if($request->has('wound_image')){
+            Log::info('Has Wound Image');
+        }
+
+        if($request->has('wound_image')){
             $image = $this->storeImage($request->file('wound_image'), 'wound');
             $progress = [
                 'wound_id' => $wound->id,
@@ -263,7 +267,7 @@ class WoundController extends Controller
             $pixel = system($command2);
             Log::info('Pixel : '.$pixel);
 
-            $progress->area = $pixel / $pixel_per_cm;
+            $progress->area = $pixel / ($pixel_per_cm * $pixel_per_cm);
             $progress->save();
         }
 

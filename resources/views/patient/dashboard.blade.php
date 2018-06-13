@@ -19,7 +19,7 @@
 
                 <div class="col-md-12">
                     @foreach($c->wounds as $wound)
-                        <div class="col-md-4" style="padding: 0">
+                        <div class="col-md-4 col-sm-6" style="padding: 0">
                             <div class="panel panel-primary" id="main-panel">
                                 <div class="panel-heading">
                                     <h1>

@@ -22,6 +22,8 @@ Route::get('about', function () {
 Auth::routes();
 
 Route::get('test', 'TestController@test');
+Route::get('test_upload', 'TestController@testUpload');
+Route::post('test_upload', 'TestController@fileUpload');
 
 Route::group(['middleware' => 'auth'], function (){
 
@@ -42,7 +44,6 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('profile/{id}', 'HomeController@profile');
 
     Route::get('send', 'TestController@send');
-
 
     Route::group(['prefix' => 'admin', 'middleware' => 'authAdmin'], function (){
 
