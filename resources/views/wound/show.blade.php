@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('head')
+    @if(sizeof($wound->progress) > 0)
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         google.charts.load('current', {'packages':['corechart']});
@@ -23,6 +24,7 @@
             chart.draw(data, options);
         }
     </script>
+    @endif
 @endsection
 
 @section('content')
@@ -60,12 +62,25 @@
                     {{--<h4>
                         <b>รหัสเคส</b> : {{ $wound->cases->id }}
                     </h4>--}}
-                    @if(Request::is('admin/*') or Request::is(('doctor/*')))
+                    @if(Request::is('admin/*'))
                         <hr style="display: block;background-color: #696969;height: 1px">
                         <div class="col-md-12 text-right">
                             <a href="{{ url('admin/wound/progress/create/'.$wound->id) }}" class="btn btn-default">
                                 เพิ่มรูปแผล
                             </a>
+                            <a href="{{ url('admin/wound/'.$wound->id.'/status') }}" class="btn btn-primary">
+                                เปลี่ยนสถานะ
+                            </a>
+                            <a href="{{ url('admin/wound/'.$wound->id.'/edit') }}" class="btn btn-warning">
+                                แก้ไข
+                            </a>
+                            <a href="" class="btn btn-danger">
+                                ลบ
+                            </a>
+                        </div>
+                    @elseif(Request::is(('doctor/*')))
+                        <hr style="display: block;background-color: #696969;height: 1px">
+                        <div class="col-md-12 text-right">
                             <a href="{{ url('doctor/wound/'.$wound->id.'/status') }}" class="btn btn-primary">
                                 เปลี่ยนสถานะ
                             </a>

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\App;
 use Intervention\Image\Facades\Image as Img;
+use Log;
 
 trait ImageTrait
 {
@@ -49,6 +50,7 @@ trait ImageTrait
         ];
 
         $file = Image::create($fileRecord);
+        self::resizeImage($file, 'default');
         return $file;
     }
 
@@ -91,12 +93,13 @@ trait ImageTrait
 
     public function resizeImage($file, $type)
     {
+        Log::info('Resize');
         $image = Storage::disk('local')->get($file->name);
 
         if($type == 'profile'){
             $width = '400';
         }elseif ($type == 'cover'){
-            $width = '800';
+            $width = '1200';
         }else{
             // default value
             $width = '500';
