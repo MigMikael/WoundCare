@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/home', 'HomeController@index')->name('home');
 
     Route::get('image/show/{id}', 'ImageController@show');
+    Route::get('image/present/{id}', 'ImageController@present');
 
     Route::get('doctor', 'DoctorController@index');
 

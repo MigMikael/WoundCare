@@ -247,6 +247,7 @@ class WoundController extends Controller
         $progress_id = $request->get('progress_id');
         $contour_no = $request->get('contour_no');
         $progress = Progress::findOrFail($progress_id);
+        Log::info('contour no : '.$contour_no);
 
         if(env('APP_ENV','local') == 'production'){
             # Ubuntu Machine
@@ -266,17 +267,17 @@ class WoundController extends Controller
             $image = Image::findOrFail($progress->image);
             $root_path = 'C:\\Users\\Mig\\Documents\\LaravelProject\\WoundCare\\';
 
-            $command = 'python '. $root_path .'public\\pixelpercm.py --image '. $root_path .'storage\\app\\'.$image->name. ' --width 5 --contour '.$contour_no . '  2>&1';
+            $command = 'python '. $root_path .'public\\pixelpercm.py --image '. $root_path .'storage\\app\\'.$image->name. ' --width 2.5 --contour '.$contour_no . '  2>&1';
             Log::info($command);
             $pixel_per_cm = system($command);
-            Log::info('Pixel per cm : '.$pixel_per_cm);
+            Log::info('Area : '.$pixel_per_cm);
 
-            $command2 = 'python '. $root_path .'public\\predictor.py --model ' . $root_path . 'public\\model1.model --image ' . $root_path . 'storage\\app\\'.$image->name. ' 2>&1';
+            $command2 = 'python '. $root_path .'public\\predictor_2.py --model ' . $root_path . 'public\\model1.model --image ' . $root_path . 'storage\\app\\'.$image->name. ' --suffix '. $image->id .' 2>&1';
             Log::info($command2);
             $pixel = system($command2);
             Log::info('Pixel : '.$pixel);
 
-            $progress->area = $pixel / ($pixel_per_cm * $pixel_per_cm);
+            $progress->area = $pixel / $pixel_per_cm;
             $progress->save();
         }
 

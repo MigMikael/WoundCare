@@ -36,9 +36,9 @@
                     </button>
 
 
-                    <a class="navbar-brand contain" href="{{ url('/home') }}">
-                        {{--{{ config('app.name', 'Laravel') }}--}}
-                        <img src="{{ url('/img/logo6.png') }}" alt="">
+                    <a class="navbar-brand" href="{{ url('/home') }}">
+                        <b>{{ config('app.name', 'Laravel') }}</b>
+                        {{--<img src="{{ url('/img/logo6.png') }}" alt="">--}}
                     </a>
                 </div>
 

@@ -15,4 +15,10 @@ class ImageController extends Controller
         $file = Storage::disk('local')->get($image->name);
         return response($file, 200)->header('Content-Type', $image->mime);
     }
+
+    public function present($id)
+    {
+        $image = Image::findOrFail($id);
+        return view('present', ['image' => $image]);
+    }
 }

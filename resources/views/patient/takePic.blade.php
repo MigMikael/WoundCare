@@ -19,7 +19,9 @@
                     <div class="panel-body">
                         <input name="wound_id" type="hidden" value="{{ $wound->id }}">
                         <div class="form-group{{ $errors->has('wound_image') ? ' has-error' : '' }}">
-                            <label for="profile_image" class="col-md-4 control-label">กดที่นี่เพื่อถ่ายรูป</label>
+                            <label for="profile_image" class="col-md-4 control-label" style="font-size: larger">
+                                กดที่นี่เพื่อถ่ายรูป
+                            </label>
 
                             <div class="col-md-6">
                                 <input id="wound_image" type="file" accept="image/*" class="form-control" name="wound_image" value="{{ old('wound_image') }}" placeholder="กดที่นี่เพื่อถ่ายรูปแผล" multiple>
@@ -31,6 +33,8 @@
                                 @endif
                             </div>
                         </div>
+                    </div>
+                    <div class="panel-footer">
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <button type="submit" value="Submit" class="btn btn-primary btn-lg">
@@ -38,9 +42,6 @@
                                 </button>
                             </div>
                         </div>
-                    </div>
-                    <div class="panel-footer">
-
                     </div>
                 </div>
                 {!! Form::close() !!}

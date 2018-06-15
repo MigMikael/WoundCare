@@ -50,7 +50,7 @@ trait ImageTrait
         ];
 
         $file = Image::create($fileRecord);
-        self::resizeImage($file, 'default');
+        self::resizeImage($file, 'cover');
         return $file;
     }
 
@@ -93,13 +93,13 @@ trait ImageTrait
 
     public function resizeImage($file, $type)
     {
-        Log::info('Resize');
+        #Log::info('Resize');
         $image = Storage::disk('local')->get($file->name);
 
         if($type == 'profile'){
             $width = '400';
         }elseif ($type == 'cover'){
-            $width = '1200';
+            $width = '256';
         }else{
             // default value
             $width = '500';

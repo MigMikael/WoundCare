@@ -130,7 +130,7 @@
                                     </h3>
                                     <hr style="display: block;background-color: #696969;height: 1px">
                                     <div class="col-md-6 wound-img-container">
-                                        <a href="{{ url('image/show/'.$p->image) }}" target="_blank">
+                                        <a href="{{ url('image/present/'.$p->image) }}" target="_blank">
                                             <img class="img-thumbnail img-responsive large-img" src="{{ url('image/show/'.$p->image) }}">
                                             <div class="overlay">
                                                 <div class="overlay-text">แสดงภาพ</div>
