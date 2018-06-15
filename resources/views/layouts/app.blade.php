@@ -51,9 +51,9 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{{ url('about') }}">เกี่ยวกับ</a></li>
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ url('about') }}">เกี่ยวกับ</a></li>
                             <li><a href="{{ route('login') }}">เข้าสู่ระบบ</a></li>
                             {{--<li><a href="{{ route('register') }}">Register</a></li>--}}
                         @else

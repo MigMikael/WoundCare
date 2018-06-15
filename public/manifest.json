@@ -1,0 +1,29 @@
+{
+  "name": "WoundSee",
+  "short_name": "WoundSee",
+  "icons": [{
+    "src": "img/woundsee_logo-128.png",
+    "sizes": "128x128",
+    "type": "image/png"
+  }, {
+    "src": "img/woundsee_logo-144.png",
+    "sizes": "144x144",
+    "type": "image/png"
+  }, {
+    "src": "img/woundsee_logo-152.png",
+    "sizes": "152x152",
+    "type": "image/png"
+  }, {
+    "src": "img/woundsee_logo-192.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  }, {
+    "src": "img/woundsee_logo-256.png",
+    "sizes": "256x256",
+    "type": "image/png"
+  }],
+  "start_url": "/index.php",
+  "display": "standalone",
+  "background_color": "#2c3e50",
+  "theme_color": "#243242"
+}

@@ -33,7 +33,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" style="height: 65vh;padding-top: 3%;background-color: #EEEEEE">
+        <div class="row" style="height: 80vh;padding-top: 3%;background-color: rgb(247,247,247)">
             <div class="container">
                 <div class="col-md-4" style="border-right: 1px dashed">
                     <h1>Accessible</h1>
@@ -50,6 +50,9 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
                     <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
                 </div>
+            </div>
+            <div class="container col-md-4 col-md-offset-4 col-sm-12" style="text-align: center">
+                <img src="{{ url('img/woundsee_logo.png') }}" alt="" class="img-responsive">
             </div>
         </div>
 
