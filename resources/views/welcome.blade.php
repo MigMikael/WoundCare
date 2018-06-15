@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row row-continue">
             <div class="jumbotron jumbotron-continue" style="background-image: url('img/telemedicine.png'); background-repeat: no-repeat; background-size: cover; height: 90vh;">
-                <div class="container" style="background-color: rgba(0,0,0,0.2); padding: 7%">
+                <div class="container" style="background-color: rgba(0,0,0,0.2); padding: 7%; color: #000000">
                     <h1>
                         <b>WoundSee</b>
                     </h1>

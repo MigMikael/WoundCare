@@ -44,11 +44,11 @@
                     </h1>
                 </div>
                 <div class="panel-body">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <img class="img-responsive img-thumbnail large-img" src="{{ url('image/show/'.$p->image) }}" alt="">
                     </div>
-                    <div class="col-md-8">
-                        <h1 style="font-size: larger">
+                    <div class="col-md-6 text-center" style="color: #000000">
+                        <h1>
                             ขนาดแผล :
                             <b>{{ $p->area }}</b> cm<sup>2</sup>
                         </h1>
@@ -56,14 +56,14 @@
                     <div class="col-md-12">
                         <br>
                     </div>
-                    <div class="col-md-12">
-                        <p>Comment : </p>
+                    <div class="col-md-12" style="color: #000000">
+                        <h2>Comment : </h2>
                         <div class="well">
-                            <p style="font-size: larger">{{ $p->comment }}</p>
+                            <h3 style="font-size: larger">{{ $p->comment }}</h3>
                         </div>
-                        <p>คำแนะนำ : </p>
+                        <h2>คำแนะนำ : </h2>
                         <div class="well">
-                            <p style="font-size: larger">{{ $p->advice }}</p>
+                            <h3 style="font-size: larger">{{ $p->advice }}</h3>
                         </div>
                     </div>
                 </div>

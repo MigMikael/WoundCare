@@ -76,11 +76,11 @@
             <h1 style="display: inline-block">
                 @if(Request::is('admin/*'))
                     <a class="btn btn-success" href="{{ url('admin/wound/create/'.$c->id) }}">
-                        เพิ่ม &nbsp; <i class="fa fa-plus"></i>
+                        เพิ่ม
                     </a>
                 @elseif(Request::is('doctor/*'))
                     <a class="btn btn-success" href="{{ url('doctor/wound/create/'.$c->id) }}">
-                        เพิ่ม &nbsp; <i class="fa fa-plus"></i>
+                        เพิ่ม
                     </a>
                 @endif
             </h1>

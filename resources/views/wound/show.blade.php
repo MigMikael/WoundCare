@@ -121,13 +121,24 @@
                         @foreach($wound->progress->reverse() as $p)
                             <div class="timeline-block @if($loop->index % 2 == 0) timeline-block-right @else timeline-block-left @endif" id="progress{{$p->id}}">
                                 <div class="marker"></div>
-                                <div class="well timeline-content" style="padding: 20px 10px 20px 10px">
+                                <div class="well timeline-content text-center" style="padding: 20px 10px 20px 10px">
                                     <h3 style="display: inline-block">
                                         วันที่ <b>{{ explode(" ", $p->created_at)[0] }}</b>&emsp;
                                     </h3>
                                     <h3 style="display: inline-block">
                                         เวลา <b>{{ explode(" ", $p->created_at)[1] }}</b>
                                     </h3>
+                                    <h4 style="display: inline-block">
+                                        @if($p->status == 'Diagnosed')
+                                            <span class="label label-success">
+                                                วินิจฉัยแล้ว
+                                            </span>
+                                        @else
+                                            <span class="label label-danger">
+                                                รอวินิจฉัย
+                                            </span>
+                                        @endif
+                                    </h4>
                                     <hr style="display: block;background-color: #696969;height: 1px">
                                     <div class="col-md-6 wound-img-container">
                                         <a href="{{ url('image/present/'.$p->image) }}" target="_blank">
@@ -137,30 +148,19 @@
                                             </div>
                                         </a>
                                     </div>
-                                    <div class="col-md-6" style="text-align: right">
+                                    <div class="col-md-6 text-right">
                                         <h1>ขนาด &nbsp; <b>{{ $p->area }}</b>&nbsp; cm<sup>2</sup></h1>
-                                        <h2>
-                                            @if($p->status == 'Diagnosed')
-                                            <span class="label label-success">
-                                                วินิจฉัยแล้ว
-                                            </span>
-                                            @else
-                                            <span class="label label-danger">
-                                                รอวินิจฉัย
-                                            </span>
-                                            @endif
-                                        </h2>
                                         <hr>
                                         @if(Request::is('admin/*'))
-                                            <a class="btn btn-primary" href="{{ url('admin/wound/progress/'.$p->id) }}">
+                                            <a class="btn btn-primary btn-block" href="{{ url('admin/wound/progress/'.$p->id) }}">
                                                 รายละเอียด
                                             </a>
                                         @elseif(Request::is('doctor/*'))
-                                            <a class="btn btn-primary" href="{{ url('doctor/wound/progress/'.$p->id) }}">
+                                            <a class="btn btn-primary btn-block" href="{{ url('doctor/wound/progress/'.$p->id) }}">
                                                 รายละเอียด
                                             </a>
                                         @elseif(Request::is('patient/*'))
-                                            <a class="btn btn-primary" href="{{ url('patient/wound/progress/'.$p->id) }}">
+                                            <a class="btn btn-primary btn-block" href="{{ url('patient/wound/progress/'.$p->id) }}">
                                                 รายละเอียด
                                             </a>
                                         @endif

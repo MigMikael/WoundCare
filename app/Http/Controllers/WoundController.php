@@ -277,7 +277,10 @@ class WoundController extends Controller
             $pixel = system($command2);
             Log::info('Pixel : '.$pixel);
 
-            $progress->area = $pixel / $pixel_per_cm;
+            $width_px = sqrt($pixel);
+            $width_cm = $width_px / $pixel_per_cm;
+
+            $progress->area = $width_cm * $width_cm;
             $progress->save();
         }
 

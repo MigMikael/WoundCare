@@ -28,7 +28,7 @@
                                 <h1>
                                     <b>รอการวินิจฉัย</b>
                                     <a class="btn btn-success" href="{{ url('doctor/patient/create') }}">
-                                        เพื่ม &nbsp; <i class="fa fa-plus"></i>
+                                        เพื่ม
                                     </a>
                                 </h1>
                             </div>
